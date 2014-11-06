@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/var/www/html/smartbullet/protected/views/layouts/main.php</file>
+            <file>file:/var/www/html/smartbullet/protected/models/Post.php</file>
+            <file>file:/var/www/html/smartbullet/protected/models/Comment.php</file>
+            <file>file:/var/www/html/smartbullet/css/print.css</file>
+            <file>file:/var/www/html/smartbullet/js/script.js</file>
+            <file>file:/var/www/html/smartbullet/protected/views/layouts/column1.php</file>
+            <file>file:/var/www/html/smartbullet/css/screen.css</file>
+            <file>file:/var/www/html/smartbullet/protected/models/User.php</file>
+            <file>file:/var/www/html/smartbullet/protected/views/user/_comment.php</file>
+            <file>file:/var/www/html/smartbullet/protected/views/post/view.php</file>
+            <file>file:/var/www/html/smartbullet/protected/views/user/view.php</file>
+            <file>file:/var/www/html/smartbullet/css/form.css</file>
+            <file>file:/var/www/html/smartbullet/protected/views/layouts/column2.php</file>
+            <file>file:/var/www/html/smartbullet/css/ie.css</file>
+            <file>file:/var/www/html/smartbullet/css/main.css</file>
+        </group>
+    </open-files>
+</project-private>
