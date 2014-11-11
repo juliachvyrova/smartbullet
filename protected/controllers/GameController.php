@@ -51,15 +51,19 @@ class GameController extends Controller
 	 */
 	public function actionView($id)
 	{
+            //Yii::app()->user->id;
             if(Yii::app()->request->isAjaxRequest){
                     $textmsg = $_POST['msg'];
-                    $user_id = $_POST['user_id'];
+                   
                     $model = $this->loadModel($id);
-                    $msg = new Chatmsg();
-                    $msg->author_id = $user_id;
-                    $msg->text = $textmsg;
-                    $msg->game_id = $model->id;
-                    $msg->save();
+                    if($textmsg != ''){
+                        $user_id = $_POST['user_id'];
+                        $msg = new Chatmsg();
+                        $msg->author_id = $user_id;
+                        $msg->text = $textmsg;
+                        $msg->game_id = $model->id;
+                        $msg->save();
+                    }
                     $str = '';
                     $model = $this->loadModel($id);
                     foreach ($model->chatmsg as $chat){
@@ -68,7 +72,11 @@ class GameController extends Controller
                                  $str.= $chat->text.'<br>';
                            }
                     } 
-                    echo $str;
+                    if (isset($_POST['polling'])){
+                        echo json_encode(array(
+                            'result' => $str
+                        ));
+                    }else   echo $str;
                     Yii::app()->end();
                 }
             else {
