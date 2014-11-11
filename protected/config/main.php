@@ -32,10 +32,24 @@ return array(
 
 	// application components
 	'components'=>array(
+            
+                'MyRedis'=>array(
+                    'class'=>'components.MyRedis',
+                    '_redis'=>'myredis',
+                    
+                ),
+                
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+                "redis" => array(
+                        "class" => "components.redis.ARedisConnection",
+                        "hostname" => "localhost",
+                        "port" => 6379,
+                        "database" => 1,
+                        "prefix" => "Yii.redis."
+                ),
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(

@@ -954,3 +954,673 @@ REQUEST_URI=/smartbullet/index.php?r=user/view&id=1
 in /var/www/html/smartbullet/protected/views/user/view.php (186)
 in /var/www/html/smartbullet/protected/controllers/UserController.php (56)
 in /var/www/html/smartbullet/index.php (13)
+2014/11/07 19:25:13 [error] [exception.CException] exception 'CException' with message 'CAssetManager.basePath "/var/www/html/smartbullet/assets" is invalid. Please make sure the directory exists and is writable by the Web server process.' in /var/www/html/yii/framework/web/CAssetManager.php:138
+Stack trace:
+#0 /var/www/html/yii/framework/web/CAssetManager.php(123): CAssetManager->setBasePath('/var/www/html/s...')
+#1 /var/www/html/yii/framework/web/CAssetManager.php(217): CAssetManager->getBasePath()
+#2 /var/www/html/yii/framework/zii/widgets/CListView.php(217): CAssetManager->publish('/var/www/html/y...')
+#3 /var/www/html/yii/framework/web/CBaseController.php(147): CListView->init()
+#4 /var/www/html/yii/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#5 /var/www/html/smartbullet/protected/views/user/index.php(20): CBaseController->widget('zii.widgets.CLi...', Array)
+#6 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#7 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', Array, true)
+#8 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', Array, true)
+#9 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/html/smartbullet/protected/controllers/UserController.php(128): CController->render('index', Array)
+#11 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): UserController->actionIndex()
+#12 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/html/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 /var/www/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#15 /var/www/html/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#19 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#21 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('user')
+#22 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/smartbullet/index.php?r=user
+---
+2014/11/07 19:25:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "game".' in /var/www/html/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#1 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 19:26:36 [error] [exception.CException] exception 'CException' with message 'GameController cannot find the requested view "index".' in /var/www/html/yii/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#1 /var/www/html/smartbullet/protected/controllers/GameController.php(10): CController->render('index', Array)
+#2 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#3 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#8 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 19:31:20 [error] [php] include(Redis.php): failed to open stream: No such file or directory (/var/www/html/yii/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(3): spl_autoload_call()
+#1 /var/www/html/yii/framework/web/CBaseController.php(126): require()
+#2 /var/www/html/yii/framework/web/CBaseController.php(95): GameController->renderInternal()
+#3 /var/www/html/yii/framework/web/CController.php(869): GameController->renderFile()
+#4 /var/www/html/yii/framework/web/CController.php(782): GameController->renderPartial()
+#5 /var/www/html/smartbullet/protected/controllers/GameController.php(8): GameController->render()
+#6 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#7 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /var/www/html/yii/framework/web/CController.php(286): GameController->runAction()
+#9 /var/www/html/yii/framework/web/CController.php(265): GameController->runActionWithFilters()
+#10 /var/www/html/yii/framework/web/CWebApplication.php(282): GameController->run()
+#11 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/html/smartbullet/index.php(13): CWebApplication->run()
+REQUEST_URI=/smartbullet/index.php?r=game
+in /var/www/html/smartbullet/protected/views/game/index.php (3)
+in /var/www/html/smartbullet/protected/controllers/GameController.php (8)
+in /var/www/html/smartbullet/index.php (13)
+2014/11/07 19:50:56 [error] [php] include(Redis.php): failed to open stream: No such file or directory (/var/www/html/yii/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(3): spl_autoload_call()
+#1 /var/www/html/yii/framework/web/CBaseController.php(126): require()
+#2 /var/www/html/yii/framework/web/CBaseController.php(95): GameController->renderInternal()
+#3 /var/www/html/yii/framework/web/CController.php(869): GameController->renderFile()
+#4 /var/www/html/yii/framework/web/CController.php(782): GameController->renderPartial()
+#5 /var/www/html/smartbullet/protected/controllers/GameController.php(8): GameController->render()
+#6 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#7 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /var/www/html/yii/framework/web/CController.php(286): GameController->runAction()
+#9 /var/www/html/yii/framework/web/CController.php(265): GameController->runActionWithFilters()
+#10 /var/www/html/yii/framework/web/CWebApplication.php(282): GameController->run()
+#11 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/html/smartbullet/index.php(13): CWebApplication->run()
+REQUEST_URI=/smartbullet/index.php?r=game
+in /var/www/html/smartbullet/protected/views/game/index.php (3)
+in /var/www/html/smartbullet/protected/controllers/GameController.php (8)
+in /var/www/html/smartbullet/index.php (13)
+2014/11/07 19:57:10 [error] [exception.CException] exception 'CException' with message 'Property "CWebApplication.redis" is not defined.' in /var/www/html/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/yii/framework/base/CModule.php(105): CComponent->__get('redis')
+#1 /var/www/html/smartbullet/protected/views/game/index.php(6): CModule->__get('redis')
+#2 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#3 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#4 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#5 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#7 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#8 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#13 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:09:26 [error] [exception.CException] exception 'CException' with message 'CRedisCache and its behaviors do not have a method or closure named "setValue".' in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(4): CComponent->__call('setValue', Array)
+#1 /var/www/html/smartbullet/protected/views/game/index.php(4): CRedisCache->setValue('lol', 'lol')
+#2 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#3 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#4 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#5 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#7 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#8 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#13 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:11:15 [error] [exception.CException] exception 'CException' with message 'CRedisCache and its behaviors do not have a method or closure named "addValue".' in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(4): CComponent->__call('addValue', Array)
+#1 /var/www/html/smartbullet/protected/views/game/index.php(4): CRedisCache->addValue('lol', 'lol')
+#2 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#3 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#4 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#5 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#7 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#8 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#13 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:11:16 [error] [exception.CException] exception 'CException' with message 'CRedisCache and its behaviors do not have a method or closure named "addValue".' in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(4): CComponent->__call('addValue', Array)
+#1 /var/www/html/smartbullet/protected/views/game/index.php(4): CRedisCache->addValue('lol', 'lol')
+#2 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#3 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#4 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#5 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#7 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#8 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#13 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:12:24 [error] [exception.CException] exception 'CException' with message 'CRedisCache and its behaviors do not have a method or closure named "addValue".' in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(4): CComponent->__call('addValue', Array)
+#1 /var/www/html/smartbullet/protected/views/game/index.php(4): CRedisCache->addValue('lol', 'lol')
+#2 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#3 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#4 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#5 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#7 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#8 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#13 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:12:25 [error] [exception.CException] exception 'CException' with message 'CRedisCache and its behaviors do not have a method or closure named "addValue".' in /var/www/html/yii/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(4): CComponent->__call('addValue', Array)
+#1 /var/www/html/smartbullet/protected/views/game/index.php(4): CRedisCache->addValue('lol', 'lol')
+#2 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#3 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#4 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#5 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#7 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#8 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#13 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:19:39 [error] [php] include(Redis.php): failed to open stream: No such file or directory (/var/www/html/yii/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(2): spl_autoload_call()
+#1 /var/www/html/yii/framework/web/CBaseController.php(126): require()
+#2 /var/www/html/yii/framework/web/CBaseController.php(95): GameController->renderInternal()
+#3 /var/www/html/yii/framework/web/CController.php(869): GameController->renderFile()
+#4 /var/www/html/yii/framework/web/CController.php(782): GameController->renderPartial()
+#5 /var/www/html/smartbullet/protected/controllers/GameController.php(8): GameController->render()
+#6 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#7 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /var/www/html/yii/framework/web/CController.php(286): GameController->runAction()
+#9 /var/www/html/yii/framework/web/CController.php(265): GameController->runActionWithFilters()
+#10 /var/www/html/yii/framework/web/CWebApplication.php(282): GameController->run()
+#11 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/html/smartbullet/index.php(13): CWebApplication->run()
+REQUEST_URI=/smartbullet/index.php?r=game
+in /var/www/html/smartbullet/protected/views/game/index.php (2)
+in /var/www/html/smartbullet/protected/controllers/GameController.php (8)
+in /var/www/html/smartbullet/index.php (13)
+2014/11/07 20:23:47 [error] [php] include(Redis.php): failed to open stream: No such file or directory (/var/www/html/yii/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/html/smartbullet/protected/views/game/index.php(2): spl_autoload_call()
+#1 /var/www/html/yii/framework/web/CBaseController.php(126): require()
+#2 /var/www/html/yii/framework/web/CBaseController.php(95): GameController->renderInternal()
+#3 /var/www/html/yii/framework/web/CController.php(869): GameController->renderFile()
+#4 /var/www/html/yii/framework/web/CController.php(782): GameController->renderPartial()
+#5 /var/www/html/smartbullet/protected/controllers/GameController.php(8): GameController->render()
+#6 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#7 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /var/www/html/yii/framework/web/CController.php(286): GameController->runAction()
+#9 /var/www/html/yii/framework/web/CController.php(265): GameController->runActionWithFilters()
+#10 /var/www/html/yii/framework/web/CWebApplication.php(282): GameController->run()
+#11 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/html/smartbullet/index.php(13): CWebApplication->run()
+REQUEST_URI=/smartbullet/index.php?r=game
+in /var/www/html/smartbullet/protected/views/game/index.php (2)
+in /var/www/html/smartbullet/protected/controllers/GameController.php (8)
+in /var/www/html/smartbullet/index.php (13)
+2014/11/07 20:24:54 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:31:34 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:39:04 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:39:06 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:39:31 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:39:32 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:44:58 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:44:59 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:45:00 [error] [exception.CException] exception 'CException' with message 'Alias "packages.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('packages.redis....', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:45:57 [error] [exception.CException] exception 'CException' with message 'Alias "redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('redis.ARedisCon...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:45:58 [error] [exception.CException] exception 'CException' with message 'Alias "redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('redis.ARedisCon...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:45:59 [error] [exception.CException] exception 'CException' with message 'Alias "redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('redis.ARedisCon...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:45:59 [error] [exception.CException] exception 'CException' with message 'Alias "redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('redis.ARedisCon...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:46:00 [error] [exception.CException] exception 'CException' with message 'Alias "redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('redis.ARedisCon...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:46:00 [error] [exception.CException] exception 'CException' with message 'Alias "redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('redis.ARedisCon...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:49:52 [error] [exception.CException] exception 'CException' with message 'Alias "components.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('components.redi...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:49:53 [error] [exception.CException] exception 'CException' with message 'Alias "components.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('components.redi...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:49:54 [error] [exception.CException] exception 'CException' with message 'Alias "components.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('components.redi...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
+2014/11/07 20:52:19 [error] [exception.CException] exception 'CException' with message 'Alias "components.redis.ARedisConnection" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/yii/framework/YiiBase.php:347
+Stack trace:
+#0 /var/www/html/yii/framework/YiiBase.php(196): YiiBase::import('components.redi...', true)
+#1 /var/www/html/yii/framework/base/CModule.php(386): YiiBase::createComponent(Array)
+#2 /var/www/html/yii/framework/base/CModule.php(103): CModule->getComponent('redis')
+#3 /var/www/html/smartbullet/protected/views/game/index.php(3): CModule->__get('redis')
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/s...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/s...', NULL, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/s...', NULL, true)
+#7 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#8 /var/www/html/smartbullet/protected/controllers/GameController.php(8): CController->render('index')
+#9 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): GameController->actionIndex()
+#10 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/html/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('')
+#14 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('game')
+#15 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/html/smartbullet/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/smartbullet/index.php?r=game
+---
