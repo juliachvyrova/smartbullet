@@ -29,7 +29,6 @@ foreach ($model->chatmsg as $chat){
     echo CHtml::ajaxSubmitButton('Отправить', '', array(
     'type' => 'POST',
     'update' => '#output',
-    //'success' => "js: $('#output').animate({'scrollTop':999});"
 ),
 array(
    'type' => 'submit'
@@ -39,6 +38,7 @@ array(
 <style>
     .user_name{
         color: salmon;
+        font-style: italic ;
     }
     
     .chat_win{

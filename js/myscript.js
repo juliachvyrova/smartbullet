@@ -1,7 +1,6 @@
 $(document).ready(function(){
     $('#output').animate({'scrollTop':999});
     lol = $('#output').scrollTop();
-    alert (lol);
     setInterval(polling, 3000);
     
     $('input[type="submit"]').on('click',function(){
@@ -10,10 +9,6 @@ $(document).ready(function(){
 });
 
 function polling(){
-   //$('#output').animate({'scrollTop':999});
- //  rol = $('#rol').outerHeight();
-  // alert(rol);
-  // alert($('#output').height());
     $.ajax({
             type: "post",
             dataType: "json",
@@ -23,9 +18,8 @@ function polling(){
             },
             success: function(data){
              $('#output').html(data.result) ;
-             if ($('#output').scrollTop() === lol)
+             if ($('#output').scrollTop() === lol)//scroll down if we in bottom of chat
                  $('#output').animate({'scrollTop':999});
-           //  $('#output').scrollTop();
             }
         });
 }
