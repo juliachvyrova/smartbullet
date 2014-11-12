@@ -32,7 +32,7 @@ class UserIdentity extends CUserIdentity
             }
             return $this->errorCode==self::ERROR_NONE;*/
             
-		$users=array(
+		/*$users=array(
 			// username => password
 			'demo'=>'demo',
 			'admin'=>'admin',
@@ -43,6 +43,26 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
 			$this->errorCode=self::ERROR_NONE;
-		return !$this->errorCode;
+		return !$this->errorCode;*/
+
+    
+        $record=User::model()->findByAttributes(array('login'=>$this->username));
+        if($record===null)
+            $this->errorCode=self::ERROR_USERNAME_INVALID;
+        else if ($this->password!=$record->password)//(!CPasswordHelper::verifyPassword($this->password,$record->password))
+            $this->errorCode=self::ERROR_PASSWORD_INVALID;
+        else
+        {
+            $this->_id=$record->id;
+            $this->setState('title', $record->login);
+            $this->errorCode=self::ERROR_NONE;
+        }
+        return !$this->errorCode;
+
 	}
+
+	public function getId()
+    {
+        return $this->_id;
+    }
 }

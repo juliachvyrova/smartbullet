@@ -32,7 +32,7 @@ class CommentController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','add','del'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -170,4 +170,55 @@ class CommentController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+		public function actionAdd()
+        {
+        	echo "string";
+        	 if (isset($_POST["wall"])) echo $_POST["wall"];
+        	 if (isset($_POST["text1"])) echo $_POST["text1"];
+            if (isset($_POST["wall"]) && isset($_POST["text1"]))
+            {   
+                
+                $author=Yii::app()->user->getId();
+                $text=$_POST["text1"];
+                $post=$_POST["wall"];
+                $time=date("y-m-d H:i:s");
+                $model=new Comment;
+                $model->author_id=$author;
+                $model->text=$text;
+                $model->post_id=$post;
+                $model->datetime=$time;
+    	        if($model->validate()){
+                    $model->save();
+                }
+                echo "Julia!";
+                Yii::app()->end();
+            }
+        }
+
+                public function actionDel()
+        {
+        	echo "Del!";
+        	if (isset($_POST["comment"]))
+            {   
+                echo "Del2!";
+                //$u1=Yii::app()->user->getId();
+                $num=$_POST["comment"];
+                $crit=new CDbCriteria;
+                $crit->condition='id=:comment';                
+                //$crit->condition='user1=:u AND user2=:f AND type=0';
+                $crit->params=array(
+                    'comment'=>$num,
+                );
+
+
+                $model=  Comment::model()->find($crit);
+                $model->delete();
+               
+
+                    echo 'You stop folow!';
+                   
+                Yii::app()->end();
+            }
+        }
 }

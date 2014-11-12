@@ -4,7 +4,8 @@ body
 	padding: 0;
 	color: #555;
 	font: normal 10pt Arial,Helvetica,sans-serif;
-	background: #EFEFEF;
+	//background: #EFEFEF;
+	background: #fff;
 }
 
 #page
@@ -19,12 +20,19 @@ body
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED;
+	border-top: 3px solid #55cfb6;
+	background:  linear-gradient(#777c7f, #44494c, #33383b) #44494c;
+	// #44494c;
+	color:#2abf9e;
+	height: 70px;
 }
 
 #content
 {
     padding: 0px;
+    padding-bottom: 5px;
+    overflow: hidden;
+    min-height: 400px;
 
 }
 

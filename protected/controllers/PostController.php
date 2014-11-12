@@ -32,7 +32,7 @@ class PostController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','del','add'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -170,4 +170,68 @@ class PostController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionAdd()
+        {
+        	echo "string";
+            if (isset($_POST["wall"]) && isset($_POST["text1"]))
+            {   
+                
+                $author=Yii::app()->user->getId();
+                $text=$_POST["text1"];
+                $wall=$_POST["wall"];
+                $time=date("y-m-d H:i:s");
+                $model=new Post;
+                $model->author_id=$author;
+                $model->text=$text;
+                $model->wall_id=$wall;
+                $model->datetime=$time;
+    	        if($model->validate()){
+                    $model->save();
+                }/**/
+                echo "Julia!";
+                Yii::app()->end();
+            }
+        }
+
+
+        public function actionDel()
+        {
+        	echo "Del!";
+        	if (isset($_POST["num"]))
+            {   
+                echo "Del2!";
+                //$u1=Yii::app()->user->getId();
+                $num=$_POST["num"];
+                $crit=new CDbCriteria;
+                $crit->condition='post_id=:post';                
+                //$crit->condition='user1=:u AND user2=:f AND type=0';
+                $crit->params=array(
+                    'post'=>$num,
+                );
+
+                $count=  Comment::model()->count($crit);
+                if ($count>0){
+                $model=  Comment::model()->find($crit);
+                $model->deleteAll();
+               }
+                
+                $crit=new CDbCriteria;
+                $crit->condition='id=:post';
+                $crit->params=array(
+                    ':post'=>$num,
+                );
+                
+                $model=  Post::model()->find($crit);
+                $model->delete();
+
+                
+              
+
+                    echo 'You stop folow!';
+                   
+                Yii::app()->end();
+            }
+        }
+
 }

@@ -3,7 +3,7 @@
 
 $this->pageTitle=Yii::app()->name;
 ?>
-
+<?php if (!Yii::app()->user->isGuest) echo "<a href=/smartbullet/index.php?r=user/view&id=".Yii::app()->user->GetId().">моя страница</a>" ;?>
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
 
 <p>Congratulations! You have successfully created your Yii application.</p>

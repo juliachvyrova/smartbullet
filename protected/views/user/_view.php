@@ -3,35 +3,13 @@
 /* @var $data User */
 ?>
 
-<div  class="view">
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('login')); ?>:</b>
-	<?php echo CHtml::encode($data->login); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('password')); ?>:</b>
-	<?php echo CHtml::encode($data->password); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('brth')); ?>:</b>
-	<?php echo CHtml::encode($data->brth); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('city')); ?>:</b>
-	<?php echo CHtml::encode($data->city); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?>:</b>
-	<?php echo CHtml::encode($data->email); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('rating')); ?>:</b>
-	<?php echo CHtml::encode($data->rating); ?>
-	<br />
+<div  class="person">
+	<div class="person-photo"></div>
+			<?php echo "<a href=/smartbullet/index.php?r=user/view&id=".$data->id.">".$data->login."</a>";?>
+			<?php if($data->first_name!=null || $data->last_name!=null):?>
+				<div class="time"><?php echo $data->first_name." ".$data->last_name;?></div>				
+			<?php endif;?>
+			<div class="time"><?php echo "Рейтинг: ".$data->rating;?></div>
 
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('photo')); ?>:</b>

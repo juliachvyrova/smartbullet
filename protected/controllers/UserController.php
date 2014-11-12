@@ -28,11 +28,11 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','go'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','view','friends','serch','requests'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -55,6 +55,46 @@ class UserController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
+
+	public function actionFriends()
+	{
+		$id=Yii::app()->user->getId();
+		$crit=new CDbCriteria;
+        $crit->condition='user1=:u AND type=0';
+        $crit->params=array(
+            ':u'=>$id,
+        );
+
+        $count=  Relationship::model()->count($crit);
+
+		//$id=Yii::app()->user->getId();
+		//parent::count($condition, $params);
+		$this->render('friends',array(
+			'model'=>$this->loadModel($id),//Relationship::loadModel()->find($crit),//
+			'count'=>$count,
+		));
+	}
+
+	public function actionRequests(){
+		$id=Yii::app()->user->getId();
+		$crit=new CDbCriteria;
+        $crit->condition='user1=:u AND type=2';
+        $crit->params=array(
+            ':u'=>$id,
+        );
+
+        $count=  Relationship::model()->count($crit);
+        $model= Relationship::model()->find($crit);
+
+		//$id=Yii::app()->user->getId();
+		//parent::count($condition, $params);
+		$this->render('requests',array(
+
+			'model'=>$this->loadModel($id),
+			'count'=>$count,
+		));
+	}
+			//'model'=>$this->loadModel($id),
 
 	/**
 	 * Creates a new model.
@@ -170,4 +210,7 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+
+	public function actionGo(){echo "string";}
 }
