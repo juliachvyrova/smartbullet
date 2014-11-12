@@ -24,7 +24,6 @@ foreach ($model->chatmsg as $chat){
  <?php 
     echo CHtml::beginForm();
     echo CHtml::hiddenField('user_id' , '2');
-    echo CHtml::hiddenField('length' , $str);
     echo CHtml::textField('msg'); 
     echo CHtml::ajaxSubmitButton('Отправить', '', array(
     'type' => 'POST',
