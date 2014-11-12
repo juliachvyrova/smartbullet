@@ -20,8 +20,8 @@ class m141111_114612_add_chat extends CDbMigration
 
 	public function down()
 	{
-            $this->deleteTable('chatmsg');
-             $this->deleteTable('game');
+            $this->dropTable('chatmsg');
+             $this->dropTable('game');
 	}
 
 	/*
