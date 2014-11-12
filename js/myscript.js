@@ -6,6 +6,23 @@ $(document).ready(function(){
     $('input[type="submit"]').on('click',function(){
          $('#output').animate({'scrollTop':999});
     });
+    
+    $('.solut').on('click',function(){
+        $.ajax({
+            url: 'php/engine.php',
+            type: "post",
+            dataType: "json",
+            data: {
+                "value" : this.value ,
+                "select": $('#direction option:selected').html()
+            },
+            success: function(data){
+                $('#field').html(data.result);
+            }
+        });
+        $('#choise').slideToggle(1500);
+        setTimeout($('#choise').slideToggle(1500), 1000) ;
+    });
 });
 
 function polling(){

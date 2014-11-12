@@ -4,7 +4,19 @@
     $cs->registerScriptFile($baseUrl.'/js/myscript.js');
 ?>
 <h1>SmartBullet</h1>
-<div class="game_win"></div>
+<div class="game_win">
+    <div id="field">sdfsd</div>
+    <div id="choise">
+        <input type="submit" value="Attack" class="solut">
+        <input type="submit" value="Dodge" class="solut">
+        <input type="submit" value="Special" class="solut">
+        <select id="direction">
+            <option>Left</option>
+            <option>Right</option>
+            <option>Back</option>
+        </select>
+    </div>
+</div>
 <div id='rol'>
 <div class="chat_win" id='output'>
     
@@ -50,7 +62,23 @@ array(
     .game_win{
         height: 400px;
         background-color: black;
+        padding: 5px;
     }
+    
+    #field{
+        height: 100%;
+        width: 69%;
+        float: left;
+        background-color: silver;
+    }
+    
+    #choise{
+        height: 100%;
+        width: 30%;
+        float: right;
+        background-color: yellow;
+    }
+    
     input[type='text']{
         width: 85%;
     }
