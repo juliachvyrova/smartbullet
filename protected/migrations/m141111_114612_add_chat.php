@@ -20,8 +20,8 @@ class m141111_114612_add_chat extends CDbMigration
 
 	public function down()
 	{
-		echo "m141111_114612_add_chat does not support migration down.\n";
-		return false;
+            $this->deleteTable('chatmsg');
+             $this->deleteTable('game');
 	}
 
 	/*
