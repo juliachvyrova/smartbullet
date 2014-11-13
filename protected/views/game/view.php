@@ -4,6 +4,7 @@
     $cs->registerScriptFile($baseUrl.'/js/myscript.js');
 ?>
 <h1>SmartBullet</h1>
+<div id="my_timer">10</div>
 <div class="game_win">
     <div id="field">sdfsd</div>
     <div id="choise">
@@ -15,6 +16,7 @@
             <option>Right</option>
             <option>Back</option>
         </select>
+        
     </div>
 </div>
 <div id='rol'>
@@ -37,6 +39,7 @@ foreach ($model->chatmsg as $chat){
     echo CHtml::beginForm();
     echo CHtml::hiddenField('user_id' , Yii::app()->user->getId());
     echo CHtml::hiddenField('game_id' , $model->id);
+    echo CHtml::hiddenField('tern' , 1);
     echo CHtml::textField('msg'); 
     echo CHtml::ajaxSubmitButton('Отправить', 'index.php?r=game/polling&id=' . $model->id, array(
     'type' => 'POST',
@@ -82,5 +85,10 @@ array(
     
     input[type='text']{
         width: auto;
+    }
+    
+    #my_timer{
+        font-size: 16px;
+        color: sandybrown;
     }
 </style>

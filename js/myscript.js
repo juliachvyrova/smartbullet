@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    MaxTime = $("#my_timer").html();
+    //alert(MaxTime);
+    startTimer();
     $('#output').animate({'scrollTop':999});
     lol = $('#output').scrollTop();
     setInterval(polling, 3000);
@@ -8,25 +11,27 @@ $(document).ready(function(){
     });
     
     $('.solut').on('click',function(){
+        $('#choise').slideToggle(1500);
         $.ajax({
-            url: 'php/engine.php',
+            url: 'index.php?r=game/fight&id=0',
             type: "post",
             dataType: "json",
             data: {
-                "value" : this.value ,
-                "select": $('#direction option:selected').html()
+                "value" : des(this.value) ,
+                "select": des($('#direction option:selected').html()),
+                "tern": $('#tern').val()
             },
             success: function(data){
                 $('#field').html(data.result);
             }
         });
-        $('#choise').slideToggle(1500);
-        setTimeout($('#choise').slideToggle(1500), 1000) ;
+        //$('#choise').slideToggle(1500);
     });
 });
 
 function polling(){
     $.ajax({
+            url: 'index.php?r=game/polling&id=' + $('#game_id').val(),
             type: "post",
             dataType: "json",
             data: {
@@ -40,3 +45,35 @@ function polling(){
             }
         });
 }
+
+function des(data){
+    switch(data){
+        case 'Left':
+            return 1;
+        case 'Right':
+            return 2;
+        case 'Back':
+            return 3;
+        case 'Attack':
+            return 1;
+        case 'Dodge':
+            return 2;
+        case 'Special':
+            return 3;
+    }
+}
+
+
+function startTimer() {
+    var my_timer = $("#my_timer").html();
+    if (my_timer == 0) {
+            //alert("Время вышло");
+          $('#choise').slideDown(1000);
+          $("#my_timer").html(MaxTime);
+          //setTimeout(startTimer, 1000);
+          return;
+     }
+    my_timer--;
+    $("#my_timer").html(my_timer);
+    setTimeout(startTimer, 1000);
+  }
