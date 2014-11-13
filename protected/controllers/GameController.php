@@ -23,7 +23,7 @@ class GameController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','polling','fight'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -42,27 +42,18 @@ class GameController extends Controller
  
 	public function actionView($id)
 	{
-            //Yii::app()->user->id;
-            if(Yii::app()->request->isAjaxRequest){ //if ajax 
-                    $this->polling($id);
-                }
-            else {
 		$this->render('view',array( //if it's first enter
 			'model'=>$this->loadModel($id),
 		));
-            }
-            Yii::app()->end();
 	}
 
-	protected function polling($id){
+	public function actionPolling($id){
             
                $textmsg = $_POST['msg'];
-
-               //$model = $this->loadModel($id);
                if($textmsg != ''){ //add messege
-                   $user_id = $_POST['user_id'];
+                  // $user_id = $_POST['user_id'];
                    $msg = new Chatmsg();
-                   $msg->author_id = $user_id;
+                   $msg->author_id = Yii::app()->user->getId();
                    $msg->text = $textmsg;
                    $msg->game_id = $id;
                    $msg->save();
@@ -80,17 +71,16 @@ class GameController extends Controller
                        'result' => $str,
                    ));
                }else   echo $str;   
+               Yii::app()->end();
         }
 
 
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Game');
-                
-                 
-                    $this->render('index',array(
-                            'dataProvider'=>$dataProvider,
-                    ));
+            $dataProvider=new CActiveDataProvider('Game');
+                $this->render('index',array(
+                        'dataProvider'=>$dataProvider,
+                ));
             
 	}
 
@@ -112,4 +102,23 @@ class GameController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionFight($id){
+            $model = new LogGame();
+            $model->game_id = $id;
+            $model->user_id = Yii::app()->user->getId();
+            $model->action = $_POST['value'];
+            $model->direction = $_POST['select'];
+            $model->save();
+            $model = $this->loadModel($id);
+            $str = '';
+            foreach ($model->loggame as $log){
+                $str .= $log->action . ' ';
+                $str .= $log->direction . "<br>";
+            }
+            echo json_encode(array(
+                       'result' => $str,
+                   ));
+            Yii::app()->end();
+        }
 }

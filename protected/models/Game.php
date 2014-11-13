@@ -41,6 +41,7 @@ class Game extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'chatmsg' => array(self::HAS_MANY, 'Chatmsg', 'game_id'),
+                    'loggame' => array(self::HAS_MANY, 'LogGame', 'game_id'),
 		);
 	}
 
