@@ -29,7 +29,11 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		if(!Yii::app()->user->isGuest)
+			$this->redirect(array('/user/view','id'=>Yii::app()->user->GetId()));
+		else
+			$this->redirect(array('login'));
+			//$this->render('index');
 	}
 
 	/**
@@ -77,6 +81,12 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
+		/*$identity=new UserIdentity($username,$password);
+		if($identity->authenticate())
+    		Yii::app()->user->login($identity);
+		else
+    		echo $identity->errorMessage;*/
+    		 if (Yii::app()->user->isGuest) {
 		$model=new LoginForm;
 
 		// if it is ajax validation request
@@ -97,6 +107,8 @@ class SiteController extends Controller
 		// display the login form
 		$this->render('login',array('model'=>$model));
 	}
+	else{$this->redirect(array('/user/view','id'=>Yii::app()->user->GetId()));}
+}
 
 	/**
 	 * Logs out the current user and redirect to homepage.

@@ -1,0 +1,311 @@
+/*
+    input[type=button], input[type=submit] {
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: rgb(64,199,129);
+  box-shadow: 0 -3px rgb(53,167,110) inset;
+  transition: 0.2s;
+} 
+ input[type=button]:hover, input[type=submit]:hover { background: rgb(53, 167, 110); }
+input[type=button]:active, input[type=submit]:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+*/
+
+
+    .delPost, .delComm{
+        background: url("../images/del.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 25px;
+        height: 25px;
+        border-radius: 60px;
+        border: 1px solid #368a77 ;
+       // display: inline-block;
+       float: right;
+
+    }
+
+    .delPost:hover::after, .delComm:hover::after { 
+ content: attr(data-title); 
+ background: rgba(82,210,185,0.4); /* Полупрозрачный цвет фона */
+    font-family: Arial, sans-serif; /* Гарнитура шрифта */
+    font-size: 11px; /* Размер текста подсказки */
+    padding: 5px 10px; /* Поля */
+    border: 1px solid rgba(82,210,185,1); /* Параметры рамки */
+    margin-left: -65px;
+   // margin-top: 80px;
+}
+
+
+.person{
+  width: 45%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 15px;
+  border-radius: 20px;
+  overflow: auto;
+  background: #fff;
+  float: left;
+  margin-left: 15px;
+
+}
+
+.person-photo{
+  width: 140px;
+  height: 140px;
+  float: left;
+  margin-right: 15px;
+  background: red;
+  border-radius: 20px;
+  background: url("../images/nophoto.jpg");
+  background-size: cover;
+
+}
+
+#user-wall input[type=button]{
+	float: right;
+	margin-right: 15px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+
+
+input[type=button], input[type=submit], .button {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: .5em 2em;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: #44bea5 #44bea5 #44bea5;
+  border-radius: 6px;
+  background: linear-gradient(#66e0c7, #44bea5) #55cfb6;
+
+  transition: 0.2s;
+} 
+.button{padding-top: 8px; padding-bottom: 9px;}
+input[type=button]:hover, input[type=submit]:hover, .button:hover { background: linear-gradient(#77f1d8, #55cfb6) #66e0c7;  }
+input[type=button]:active, input[type=submit]:active, .button:active { background: linear-gradient(#55cfb6, #77f1d8) #f59500; }
+
+.row a:hover{ color: #fff;}
+
+
+#user-photo input[type=button]{
+  margin: 0 ;
+  width: 200px;
+  margin-left: 258px;
+  margin-top: 15px;
+}
+
+#user-photo input[type=button]:hover{
+  color: white;
+}
+
+	.text-comm{
+		margin-left: 55px;
+	}
+	.form{
+		margin: 0 auto;
+	}
+	.first{
+		text-align: center;
+
+	}
+	#left-menu{
+        padding: 0px;
+        font-family: sans-serif;
+        font-size: 13px;
+        //margin-top: 20px;
+        height: 500px;
+        background: #33383b;//#44494c;
+        color:#fff;
+    }
+    
+    .time{
+    	color: #999;
+    	margin-bottom: 10px;
+    }
+    .mini-photo{
+        height: 50px;
+        width: 50px;
+        border-radius: 5px;
+        background: url("../images/nophoto.jpg");
+        background-size: cover;
+        float: left;
+        margin-right: 5px;
+        margin-bottom: 10px;
+    }
+    
+    li{
+        height: 20px; width: 100%;
+        list-style-type:none;
+        margin-bottom: 10px;
+    }
+
+    #left-menu a{
+        text-decoration: none;
+        color:#fff;
+    }
+
+
+    #left-menu a:hover{
+        color:#55cfb6;
+
+    }
+   
+   li{
+    width: 90%;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    font-weight: bold;
+   }
+   /*li:first-child{
+    height: 50px;
+    //margin-top: 10px;
+    background: #e0e0e0;
+    color: #33373b;
+   }*/
+   ul{
+    padding: 0px;
+    margin: 0;
+   }
+
+
+
+   #user-main{
+       // float:right;
+        //width: 100%;
+        overflow: auto;
+       // background: #eeeff2;
+        font-family: sans-serif;
+
+    }
+    
+    #user-photo{
+       //border-bottom: 1px black solid;
+       //background: url("../images/back.jpg") rgba(0,0,0,0.1);
+       //background-size: cover;
+
+
+    }
+    
+    #photo{
+        width:200px;
+        height:200px;
+        border-radius: 20px;
+        background: url("../images/nophoto.jpg");
+       //background: url("123.jpg");
+        background-size: cover;
+        margin: auto;   
+        margin-top: 20px;
+    }
+    
+    #login{
+        font-size: 30px;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        color: #2abf9e; 
+        font-weight: bold; 
+    }
+
+
+    #user-wall a, .person a{
+        font-size: 15px;
+        color: #2abf9e; 
+        font-weight: bold; 
+        text-decoration: none;
+    }
+
+
+    #user-wall a:hover, .person a:hover{
+        //color:#55cfb6;
+        text-decoration: underline;
+    }
+
+
+    .person a{
+        font-size: 20px;
+        margin-top: 150px;
+    }
+    
+    #user-info{
+       // background: #dfd;
+       // height: 100px;
+       border-top: 1px black solid;
+       min-height: 50px;
+       display: none;
+    }
+    
+    #user-wall{
+      //  background: #ddf;
+      //  height: 100px;
+      min-height: 100px;
+    	border-top: 1px black solid;
+
+    }
+    
+
+    .post{
+        margin: 0 auto;
+        //border: 1px solid black;
+        width: 95%;
+        padding: 10px;
+        margin-top: 15px;
+        border-radius: 20px;
+        overflow: auto;
+        background: #fff;
+    }   
+    
+    .comment{
+        width: 95%;
+        padding: 10px;
+        float:right;
+    }
+    
+    .new-post{
+        margin-left: 2%;
+        width: 95%;
+        height: 50px;
+        resize:none;
+
+    }
+    
+    #add-post{
+        margin-left: 2%;
+    }
+
+    .inf{
+        font-size: 15px;
+        text-align: left;
+        font-weight: bold;
+       // border-bottom: 1px  black solid;
+    }
+
+    .Open{
+        background: url("../images/arr1.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 25px;
+        height: 25px;
+        border-radius: 60px;
+        border: 1px solid #368a77 ;
+        transition:  0.05s ease-in;
+        display: inline-block;
+    }
+
+    .Open:active{
+        transform: rotate(180deg);
+    }
+

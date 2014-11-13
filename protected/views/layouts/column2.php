@@ -6,44 +6,25 @@
 
 <?php $this->beginContent('//layouts/main'); ?>
 <style>
-    #left-menu{
-        padding: 10px;
-        font-family: sans-serif;
-        font-size: 13px;
-        //margin-top: 20px;
-        height: 500px;
-        background: #44494c;
-        color:#fff;
-    }
     
-    #mini-photo{
-        height: 50px;
-        width: 50px;
-        border-radius: 5px;
-        background: red;
-        float: left;
-        margin-right: 5px;
-        margin-bottom: 10px;
-    }
-    
-    li{
-        height: 20px; width: 100%;
-        list-style-type:none;
-        margin-bottom: 10px;
-    }
-   
+
 </style>
 <div class="span-5" id="left-menu">
 	<div>
+
+        <?php /*echo "<a href=/smartbullet/index.php?r=user/view&id=".Yii::app()->user->GetId().">моя страница</a>" ;*/?>
+
             <ul>
-            <li><div id="mini-photo"></div><br> Профиль</li>
-            <li  style="clear: both"> Игра</li>
-            <li>Сообщения</li>
-            <li>Приглашения в игру</li>
-            <li>Друзья</li>
-            <li>Заявки</li>
-            <li>Редактировать</li>
-            <li>Выход</li>
+            <li><div class="mini-photo"></div><br>
+            <?php echo "<a href=/smartbullet/index.php?r=user/view&id=".Yii::app()->user->GetId().">Профиль</a>";?><br></li>
+            <li  style="clear: both"> <a href="">Игра</a></li>
+            <li><a href="">Сообщения</a></li>
+            <li><a href="">Приглашения в игру</a></li>
+            <li><a href="/smartbullet/index.php?r=user/friends">Друзья</a></li>
+            <li><a href="">Заявки</a></li>
+            <li><a href="">Редактировать профиль</a></li>
+            <li><a href="/smartbullet/index.php?r=user">Поиск</a></li>
+            <li><a href="/smartbullet/index.php?r=site/logout">Выход</a></li>
             </ul>
 	<?php
 		/*$this->beginWidget('zii.widgets.CPortlet', array(
