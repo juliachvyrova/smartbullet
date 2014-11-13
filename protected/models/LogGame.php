@@ -1,27 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "chatmsg".
+ * This is the model class for table "log_game".
  *
- * The followings are the available columns in table 'chatmsg':
+ * The followings are the available columns in table 'log_game':
  * @property integer $id
- * @property integer $author_id
- * @property string $text
  * @property integer $game_id
- * @property string $datetime
+ * @property integer $user_id
+ * @property integer $action
+ * @property integer $direction
+ * @property integer $result
  *
  * The followings are the available model relations:
- * @property User $author
+ * @property User $user
  * @property Game $game
  */
-class Chatmsg extends CActiveRecord
+class LogGame extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'chatmsg';
+		return 'log_game';
 	}
 
 	/**
@@ -32,11 +33,10 @@ class Chatmsg extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, author_id, game_id', 'numerical', 'integerOnly'=>true),
-			array('text, datetime', 'safe'),
+			array('game_id, user_id, action, direction, result', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, author_id, text, game_id, datetime', 'safe', 'on'=>'search'),
+			array('id, game_id, user_id, action, direction, result', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,7 +48,7 @@ class Chatmsg extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 			'game' => array(self::BELONGS_TO, 'Game', 'game_id'),
 		);
 	}
@@ -60,10 +60,11 @@ class Chatmsg extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'author_id' => 'Author',
-			'text' => 'Text',
 			'game_id' => 'Game',
-			'datetime' => 'Datetime',
+			'user_id' => 'User',
+			'action' => 'Action',
+			'direction' => 'Direction',
+			'result' => 'Result',
 		);
 	}
 
@@ -86,10 +87,11 @@ class Chatmsg extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('author_id',$this->author_id);
-		$criteria->compare('text',$this->text,true);
 		$criteria->compare('game_id',$this->game_id);
-		$criteria->compare('datetime',$this->datetime,true);
+		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('action',$this->action);
+		$criteria->compare('direction',$this->direction);
+		$criteria->compare('result',$this->result);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -100,7 +102,7 @@ class Chatmsg extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Chatmsg the static model class
+	 * @return LogGame the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
