@@ -67,8 +67,11 @@ position2='up';
                 data: "newFriend="+friend,
                 success: function(content){
                     $(".sheep").load("/smartbullet/index.php/?r=user/view&id="+friend+" .sheep");
-                    if ($(".addFriend").data("friend")=="yes"){ alert('yesss');
+                    if ($(".addFriend").data("friend")=="yes"){ 
                         $("#btn"+friend).html('<input type="button" class="delFriend" data-friend="yes" data-userid='+friend+' data-url1=/smartbullet/index.php?r=relationship/del  value="Удалить из друзей"></input>');
+                    }
+                    else if($(".addFriend").data("friend")=="no"){
+                        $("#btn"+friend).html('<input type="button" class="stopFolow" data-friend="no" data-userid='+friend+' data-url1=/smartbullet/index.php?r=relationship/stopFolow  value="Отписаться"></input>');
                     }
                     return;
                 }
@@ -79,14 +82,17 @@ position2='up';
 
 
         $(document.body).on("click",".stopFolow",function(event){
-            
             friend=$(this).data("userid");
             $.ajax({
                 url: "/smartbullet/index.php/?r=relationship/stopFolow",//url,
                 type: "POST",
                 data: "friend="+friend,
                 success: function(content){
+                                
                     $(".sheep").load("/smartbullet/index.php/?r=user/view&id="+friend+" .sheep");
+                    if ($(".stopFolow").data("friend")=="no"){          
+                        $("#btn"+friend).html('<input type="button" class="addFriend" data-friend="no" data-userid='+friend+' data-url1=/smartbullet/index.php?r=relationship/add  value="Добавить в друзья"></input>');
+                    }
                     return;
                 }
             });
@@ -106,13 +112,38 @@ position2='up';
                     if ($(".delFriend").data("friend")=="yes"){
                         $("#btn"+friend).html('<input type="button" class="addFriend" data-friend="yes" data-userid='+friend+' data-url1=/smartbullet/index.php?r=relationship/add  value="Добавить в друзья"></input>');
                     }
-                        
+
                     return;
                 }
             });
             
             event.preventDefault();
         });
+
+
+        $(document.body).on("click",".seeFolow",function(event){
+            friend=$(this).data("userid");
+            url=$(this).data("url1");
+            $.ajax({
+                url: url,//"/smartbullet/index.php?r=relationship/del",//
+                type: "POST",
+                data: "friend="+friend,
+                success: function(content){
+                    $(".seeFolow").remove();
+
+                /*
+                    $(".sheep").load("/smartbullet/index.php/?r=user/view&id="+friend+" .sheep");
+                    if ($(".delFriend").data("friend")=="yes"){
+                        $("#btn"+friend).html('<input type="button" class="addFriend" data-friend="yes" data-userid='+friend+' data-url1=/smartbullet/index.php?r=relationship/add  value="Добавить в друзья"></input>');
+                    }*/
+
+                    return;
+                }
+            });
+            
+            event.preventDefault();
+        });
+
 
 
         $(document.body).on("click","#add-post",function(event){
@@ -149,7 +180,8 @@ position2='up';
                 type: "POST",
                 data: "text1="+text1+"&wall="+p,
                 success: function(content){                   // alert(content);
-                    $("#post"+p).load("/smartbullet/index.php/?r=user/view&id="+wall+" #post"+p);           
+                   // $("#post"+p).load("/smartbullet/index.php/?r=user/view&id="+wall+" #post"+p); 
+                                       $("#post"+p).load("/smartbullet/index.php/?r=user/view&id="+wall+" #AllComm"+p);          
 
                     return;
                 }
@@ -200,8 +232,8 @@ position2='up';
                 type: "POST",
                 data: "comment="+com,
                 success: function(content){
-                    alert(content);
-                    $("#post"+p).load("/smartbullet/index.php/?r=user/view&id="+wall+" #post"+p);               
+                    //alert(content);
+                    $("#post"+p).load("/smartbullet/index.php/?r=user/view&id="+wall+" #AllComm"+p);               
 
                     return;
                 }

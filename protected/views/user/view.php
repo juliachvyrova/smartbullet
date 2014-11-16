@@ -5,7 +5,7 @@
         <div id="photo"></div>
         <div class="sheep">     
             <?php if ($model->id!=Yii::app()->user->getId()): ?>
-
+                    <input type="button" class="newMessage" data-userid="<?php echo $model->id;?>" value="Написать сообщение"></input>
                 <?php if(Relationship::folow($model->id, Yii::app()->user->getId())==true):?>
                     <input type="button" class="stopFolow" data-userid="<?php echo $model->id;?>" value="Отписаться"></input>
                 <?php elseif(Relationship::friends($model->id, Yii::app()->user->getId())==true):?>
@@ -16,6 +16,7 @@
 
             <?php endif; ?> 
         </div> 
+
         <div id="login">
             <?php
                 echo $model->login;
@@ -77,7 +78,7 @@
             foreach ($model->posts as $p):
         ?>
 
-            <div class="post" id="post<?php echo $p->id; ?>">
+            <div class="post" id="post<?php echo $p->id; ?>"><div id="AllComm<?php echo $p->id; ?>">
                 <div class="mini-photo"></div>
                 <?php if (($p->user->id==Yii::app()->user->getId()) || ($model->id==Yii::app()->user->getId())):?>
                     <div class="delPost" value="Удалить" data-title="Удалить" data-post=<?php echo $p->id; ?> data-DelUrl="<?php echo Yii::app()->createUrl("post/del");?> " data-wall="<?php echo $model->id; ?>"></div>
@@ -96,7 +97,7 @@
                         echo " <br><hr><strong>Комментарии: </strong><br>";
                     }
                 ?>
-<div id="AllComm<?php echo $p->id; ?>">
+
                 <?php foreach ($p->comments as $coment):?>     
                     <div class="comment" >            
                         <div class="mini-photo"></div>
@@ -115,14 +116,14 @@
                         </div>              
                     </div>
                 <?php endforeach; ?>  
-            </div>
+            
                    <br>
                    <strong>Добавить коментарий</strong><br>
                    <div id="add-comment">
                         <textarea rows="10" cols="45" id="comm<?php echo $p->id; ?>" class="new-post"></textarea>
                         <input type="button" id="add-com" value="Добавить" data-post=<?php echo $p->id; ?> data-AddUrl="<?php echo Yii::app()->createUrl("comment/add");?> " data-wall="<?php echo $model->id; ?>"/>
                    </div>
-            </div>
+            </div></div>
                 <?php endforeach; ?> 
 
     </div>

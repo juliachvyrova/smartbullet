@@ -143,4 +143,101 @@ class Relationship extends CActiveRecord
                	return false;
             
         } 
+
+
+        public static function newFolow($u1,$u2){
+            
+            $crit=new CDbCriteria;
+                $crit->condition='user1=:u AND user2=:f AND type=1 AND state=1';
+                $crit->params=array(
+                    ':u'=>$u1,
+                    ':f'=>$u2,
+                );
+                
+                $count= Relationship::model()->count($crit);
+                if ($count==0) return false;
+                else 
+               	return true;
+               	//return $count;
+            
+        } 
+
+
+   		public static function noRelation($u1,$u2){
+            
+            $crit=new CDbCriteria;
+                $crit->condition='user1=:u AND user2=:f';
+                $crit->params=array(
+                    ':u'=>$u1,
+                    ':f'=>$u2,
+                );
+                
+                $count= Relationship::model()->count($crit);//return false;
+                //echo ($count);
+                if ($count==0) return true;
+                else 
+               	return false;
+            
+        } 
+
+
+        public static function countFriends($id){
+            
+            $crit=new CDbCriteria;
+                $crit->condition='user1=:u AND type=0';
+                $crit->params=array(
+                    ':u'=>$id,
+                );
+                
+                $count= Relationship::model()->count($crit);//return false;
+                //echo ($count);
+                return $count;
+            
+        } 
+
+		public static function countRequests($id){
+            
+            $crit=new CDbCriteria;
+                $crit->condition='user1=:u AND type=2';
+                $crit->params=array(
+                    ':u'=>$id,
+                );
+                
+                $count= Relationship::model()->count($crit);//return false;
+                //echo ($count);
+                return $count;
+            
+        } 
+
+        public static function newRequests($id){
+            
+            $crit=new CDbCriteria;
+                $crit->condition='user1=:u AND type=2 AND state=1';
+                $crit->params=array(
+                    ':u'=>$id,
+                );
+                
+                $count= Relationship::model()->count($crit);//return false;
+                //echo ($count);
+                return $count;
+            
+        }
+
+
+        public static function countMyRequests($id){
+            
+            $crit=new CDbCriteria;
+                $crit->condition='user1=:u AND type=1';
+                $crit->params=array(
+                    ':u'=>$id,
+                );
+                
+                $count= Relationship::model()->count($crit);//return false;
+                //echo ($count);
+                return $count;
+            
+        }
+
+
+        
 }

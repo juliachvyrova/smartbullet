@@ -1,1 +1,0 @@
-create table relationship(id integer(11) NOT NULL AUTO_INCREMENT, user1 integer(11),user2 integer(11),type integer(11));
