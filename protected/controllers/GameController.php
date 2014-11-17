@@ -110,7 +110,7 @@ class GameController extends Controller
             $model->user_id = Yii::app()->user->getId();
             $model->action = $_POST['value'];
             $model->direction = $_POST['select'];
-            
+            $rand = mt_rand(0, 100);
             $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id,
                    'user_id' => (Yii::app()->user->getId()),
             ));

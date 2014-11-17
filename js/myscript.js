@@ -81,7 +81,7 @@ function startTimer() {
           if(flag == true)
               flag = false;
           else {
-              user_choise(0);
+             // user_choise(0);
           }
           return;
     }
