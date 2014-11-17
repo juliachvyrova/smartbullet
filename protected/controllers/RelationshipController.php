@@ -32,7 +32,7 @@ class RelationshipController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','stopFolow','add'),
+				'actions'=>array('create','update','stopFolow','add','seeFolow'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -217,6 +217,7 @@ class RelationshipController extends Controller
                     
                     $model=  Relationship::model()->find($crit);
                     $model->type=0;
+                    $model->state=0;
                     if($model->validate()){
                         $model->save();
                     }
@@ -230,6 +231,7 @@ class RelationshipController extends Controller
                     
                     $model=  Relationship::model()->find($crit);
                     $model->type=0;
+                    $model->state=0;
                     if($model->validate()){
                         $model->save();
                     }
@@ -243,6 +245,7 @@ class RelationshipController extends Controller
                     $model->user1=$u1;
                     $model->user2=$u2;
                     $model->type=1;
+                    $model->state=1;
                     if($model->validate()){
                         $model->save();
                     }
@@ -251,6 +254,7 @@ class RelationshipController extends Controller
                     $model->user1=$u2;
                     $model->user2=$u1;
                     $model->type=2;
+                    $model->state=1;
                     if($model->validate()){
                         $model->save();
                     }
@@ -319,6 +323,52 @@ class RelationshipController extends Controller
                 Yii::app()->end();
             }
         }
+
+
+
+
+        public function actionSeeFolow()
+        {
+            if (isset($_POST["friend"]))
+            {   
+                
+                $u1=Yii::app()->user->getId();
+                $u2=$_POST["friend"];
+                $crit=new CDbCriteria;
+                $crit->condition='user1=:u AND user2=:f';
+                $crit->params=array(
+                    ':u'=>$u1,
+                    ':f'=>$u2,
+                );
+               
+                    $model=  Relationship::model()->find($crit);
+                    $model->state=0;
+                    if($model->validate()){
+                        $model->save();
+                    }
+                    
+                    $crit=new CDbCriteria;
+                    $crit->condition='user1=:f AND user2=:u';
+                    $crit->params=array(
+                        ':u'=>$u1,
+                        ':f'=>$u2,
+                    );
+                    
+                    $model=  Relationship::model()->find($crit);
+                    $model->state=0;
+                    if($model->validate()){
+                        $model->save();                    
+                    }
+                    Yii::app()->end();
+            }
+        }
+
+
+
+
+
+
+
 
         public function actionDel()
         {

@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','view','friends','serch','requests'),
+				'actions'=>array('create','update','view','friends','serch','requests','myRequests'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,7 +58,7 @@ class UserController extends Controller
 
 	public function actionFriends()
 	{
-		$id=Yii::app()->user->getId();
+		/*$id=Yii::app()->user->getId();
 		$crit=new CDbCriteria;
         $crit->condition='user1=:u AND type=0';
         $crit->params=array(
@@ -72,29 +72,95 @@ class UserController extends Controller
 		$this->render('friends',array(
 			'model'=>$this->loadModel($id),//Relationship::loadModel()->find($crit),//
 			'count'=>$count,
-		));
+		));*/
+
+ 				$id=Yii::app()->user->getId();
+                $dataProvider=new CActiveDataProvider('User',
+                array(
+                'pagination'=>array('pageSize'=>10),
+                'criteria'=>array(
+                'with'=>array(
+                'relationship' => array('alias' => 'pu')
+                ),
+                'condition' => ' pu.user1='.$id.' AND pu.type=0',
+                //'distinct'=>true,
+                'together'=>true,
+                ),
+                )
+                );
+                $count=  Relationship::countFriends($id);
+                
+                if ($count==0) $title="У вас пока нет друзей";
+                else $title="Друзья (".$count.")";
+
+                $this->render('friends',array(
+                'model'=>$dataProvider,
+                'count'=>  Relationship::countFriends($id),
+                'title'=>$title,
+                ));
 	}
 
-	public function actionRequests(){
-		$id=Yii::app()->user->getId();
-		$crit=new CDbCriteria;
-        $crit->condition='user1=:u AND type=2';
-        $crit->params=array(
-            ':u'=>$id,
-        );
+			public function actionRequests(){
+		 		$id=Yii::app()->user->getId();
+		        $dataProvider=new CActiveDataProvider('User',
+		        array(
+		        'pagination'=>array('pageSize'=>10),
+		        'criteria'=>array(
+		        'with'=>array(
+		        'relationship' => array('alias' => 'pu')
+		        ),
+		        'condition' => ' pu.user1='.$id.' AND pu.type=2',
+		        //'distinct'=>true,
+		        'together'=>true,
+		        ),
+		        )
+		        );
+		        $count=  Relationship::countRequests($id);
+		        
+		        if ($count==0) $title="У вас пока нет заявок";
+		        else $title="Заявки в друзья (".$count.")";
 
-        $count=  Relationship::model()->count($crit);
-        $model= Relationship::model()->find($crit);
+		        $this->render('friends',array(
+		        'model'=>$dataProvider,
+		        'count'=>  Relationship::countFriends($id),
+		        'title'=>$title,
+                ));
+			}
 
-		//$id=Yii::app()->user->getId();
-		//parent::count($condition, $params);
-		$this->render('requests',array(
 
-			'model'=>$this->loadModel($id),
-			'count'=>$count,
-		));
-	}
-			//'model'=>$this->loadModel($id),
+
+
+
+
+
+			public function actionMyRequests(){
+		 		$id=Yii::app()->user->getId();
+		        $dataProvider=new CActiveDataProvider('User',
+		        array(
+		        'pagination'=>array('pageSize'=>10),
+		        'criteria'=>array(
+		        'with'=>array(
+		        'relationship' => array('alias' => 'pu')
+		        ),
+		        'condition' => ' pu.user1='.$id.' AND pu.type=1',
+		        //'distinct'=>true,
+		        'together'=>true,
+		        ),
+		        )
+		        );
+		        $count=  Relationship::countMyRequests($id);
+		        
+		        if ($count==0) $title="Вы пока не подавали заявок";
+		        else $title="Мои заявки в друзья (".$count.")";
+
+		        $this->render('friends',array(
+		        'model'=>$dataProvider,
+		        'count'=>  Relationship::countFriends($id),
+		        'title'=>$title,
+                ));
+			}
+
+
 
 	/**
 	 * Creates a new model.
@@ -162,10 +228,25 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('User');
+		$dataProvider=new CActiveDataProvider('User', array(
+        'pagination'=>array('pageSize'=>10),
+		));
+
+        
+
+        $this->render('friends',array(
+        'model'=>$dataProvider,
+        'count'=>  "0",
+        'title'=>"Пользователи",
+        ));
+
+
+
+
+		/*$dataProvider=new CActiveDataProvider('User');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+		));*/
 	}
 
 	/**

@@ -55,6 +55,7 @@ class User extends CActiveRecord
             'postsUser' => array(self::HAS_MANY, 'Post', 'author_id'),
             'user1' => array(self::HAS_MANY, 'Relationship', 'user1'),
             'user2' => array(self::HAS_MANY, 'Relationship', 'user2'),
+            'relationship' => array(self::HAS_MANY, 'Relationship', 'user2'),
 		);
 	}
 

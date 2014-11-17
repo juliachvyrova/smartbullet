@@ -16,13 +16,24 @@ input[type=button]:active, input[type=submit]:active {
 }
 */
 
+.newNews{
+  border-radius: 50px;
+  background: #19ae8d;
+  margin-top: -3px;
+ float: right;
+ margin-right: 20px;
+  padding: 4px;
+  padding-left: 5px;
+  padding-right: 5px;  
+}
 
-    .delPost, .delComm{
+
+    .delPost, .delComm, .seeFolow{
         background: url("../images/del.jpg");
         background-repeat: no-repeat;
         background-size: cover;
-        width: 25px;
-        height: 25px;
+        width: 20px;
+        height: 20px;
         border-radius: 60px;
         border: 1px solid #368a77 ;
        // display: inline-block;
@@ -30,13 +41,13 @@ input[type=button]:active, input[type=submit]:active {
 
     }
 
-    .delPost:hover::after, .delComm:hover::after { 
+    .delPost:hover::after, .delComm:hover::after, .seeFolow:hover::after{ 
  content: attr(data-title); 
- background: rgba(82,210,185,0.4); /* Полупрозрачный цвет фона */
-    font-family: Arial, sans-serif; /* Гарнитура шрифта */
-    font-size: 11px; /* Размер текста подсказки */
-    padding: 5px 10px; /* Поля */
-    border: 1px solid rgba(82,210,185,1); /* Параметры рамки */
+ background: rgba(82,210,185,0.4); 
+    font-family: Arial, sans-serif; 
+    font-size: 11px;
+    padding: 5px 10px; 
+    border: 1px solid rgba(82,210,185,1); 
     margin-left: -65px;
    // margin-top: 80px;
 }
@@ -58,8 +69,8 @@ input[type=button]:active, input[type=submit]:active {
 }
 
 .person-photo{
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   float: left;
   margin-right: 15px;
   background: red;
@@ -297,8 +308,8 @@ input[type=button]:active, input[type=submit]:active, .button:active { backgroun
         background: url("../images/arr1.jpg");
         background-repeat: no-repeat;
         background-size: cover;
-        width: 25px;
-        height: 25px;
+        width: 20px;
+        height: 20px;
         border-radius: 60px;
         border: 1px solid #368a77 ;
         transition:  0.05s ease-in;

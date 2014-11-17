@@ -21,7 +21,9 @@
             <li><a href="">Сообщения</a></li>
             <li><a href="">Приглашения в игру</a></li>
             <li><a href="/smartbullet/index.php?r=user/friends">Друзья</a></li>
-            <li><a href="">Заявки</a></li>
+            <li><a href="/smartbullet/index.php?r=user/requests">Заявки <?php $c=Relationship::newRequests(Yii::app()->user->GetId()); if($c>0) echo "<span class='newNews'>+".$c."</span>";?>
+            	</li></a> 
+            <li><a href="/smartbullet/index.php?r=user/myrequests">Мои заявки</a></li>
             <li><a href="">Редактировать профиль</a></li>
             <li><a href="/smartbullet/index.php?r=user">Поиск</a></li>
             <li><a href="/smartbullet/index.php?r=site/logout">Выход</a></li>
