@@ -6,7 +6,7 @@
 <h1>SmartBullet</h1>
 <div id="my_timer">10</div>
 <div class="game_win">
-    <div id="field">sdfsd</div>
+    <div id="field"></div>
     <div id="choise">
         <input type="submit" value="Attack" class="solut">
         <input type="submit" value="Dodge" class="solut">

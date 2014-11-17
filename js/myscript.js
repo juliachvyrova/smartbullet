@@ -1,15 +1,12 @@
 $(document).ready(function(){
     MaxTime = $("#my_timer").html();
-    //alert(MaxTime);
     startTimer();
     $('#output').animate({'scrollTop':999});
     lol = $('#output').scrollTop();
     setInterval(polling, 3000);
-    
     $('input[type="submit"]').on('click',function(){
          $('#output').animate({'scrollTop':999});
     });
-    
     $('.solut').on('click',function(){
         $('#choise').slideToggle(1500);
         $.ajax({
@@ -17,17 +14,22 @@ $(document).ready(function(){
             type: "post",
             dataType: "json",
             data: {
-                "value" : des(this.value) ,
+                "value" : des(this.value),
                 "select": des($('#direction option:selected').html()),
                 "tern": $('#tern').val()
             },
             success: function(data){
-                $('#field').html(data.result);
-            }
+                $('#field').html(' ');
+                $.each(data,function (){
+                    if(this.tern == $("#tern").val() ){
+                        $('#field').append(this.action + ' ');
+                    }
+                });    
+            }     
         });
-        //$('#choise').slideToggle(1500);
     });
 });
+
 
 function polling(){
     $.ajax({
@@ -45,6 +47,7 @@ function polling(){
             }
         });
 }
+
 
 function des(data){
     switch(data){
@@ -67,12 +70,12 @@ function des(data){
 function startTimer() {
     var my_timer = $("#my_timer").html();
     if (my_timer == 0) {
-            //alert("Время вышло");
           $('#choise').slideDown(1000);
           $("#my_timer").html(MaxTime);
-          //setTimeout(startTimer, 1000);
+          setTimeout(startTimer, 1000);
+          $("#tern").val(parseInt($("#tern").val())+1);
           return;
-     }
+    }
     my_timer--;
     $("#my_timer").html(my_timer);
     setTimeout(startTimer, 1000);

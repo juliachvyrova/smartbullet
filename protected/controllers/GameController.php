@@ -113,15 +113,19 @@ class GameController extends Controller
             $model->save();
             $model = $this->loadModel($id);
             $str = '';
+            $result = array();
             foreach ($model->loggame as $log){
-                $str .= 'TERN: ' . $log->tern . ' ';
+                /*$str .= 'TERN: ' . $log->tern . ' ';
                 $str .= 'USER: ' . $log->user_id . ' ';
                 $str .= 'ACTION: ' . $log->action . ' ';
-                $str .= 'DIRECTION: ' . $log->direction . "<br>";
+                $str .= 'DIRECTION: ' . $log->direction . "<br>";*/
+                $result[$log->id] = array('user' => $log->user_id,
+                                          'tern' => $log->tern,
+                                          'action' => $log->action,
+                                          'direction' => $log->direction
+                );
             }
-            echo json_encode(array(
-                       'result' => $str,
-                   ));
+            echo json_encode($result);
             Yii::app()->end();
         }
 }
