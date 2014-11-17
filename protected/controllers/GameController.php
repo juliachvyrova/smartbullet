@@ -23,7 +23,7 @@ class GameController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','polling','fight'),
+				'actions'=>array('index','view','polling','fight','tern'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -104,21 +104,22 @@ class GameController extends Controller
 	}
         
         public function actionFight($id){
+            
             $model = new LogGame();
             $model->game_id = $id;
             $model->user_id = Yii::app()->user->getId();
             $model->action = $_POST['value'];
             $model->direction = $_POST['select'];
-            $model->tern = $_POST['tern'];
+            
+            $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id,
+                   'user_id' => (Yii::app()->user->getId()),
+            ));
+            $model->tern = count($logs) + 1;
             $model->save();
+            
             $model = $this->loadModel($id);
-            $str = '';
             $result = array();
             foreach ($model->loggame as $log){
-                /*$str .= 'TERN: ' . $log->tern . ' ';
-                $str .= 'USER: ' . $log->user_id . ' ';
-                $str .= 'ACTION: ' . $log->action . ' ';
-                $str .= 'DIRECTION: ' . $log->direction . "<br>";*/
                 $result[$log->id] = array('user' => $log->user_id,
                                           'tern' => $log->tern,
                                           'action' => $log->action,
@@ -126,6 +127,27 @@ class GameController extends Controller
                 );
             }
             echo json_encode($result);
+            Yii::app()->end();
+        }
+        
+        
+        public function actionTern($id){
+            //findAllByAttributes
+            $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id,
+                   'user_id' => (Yii::app()->user->getId()),
+                ));
+            $mylog = array();
+            foreach ($logs as $log)
+            {
+                $mylog[$log->id]=array(
+                    'user' => $log->user_id,
+                    'tern' => $log->tern,
+                    'action' => $log->action,
+                    'direction' => $log->direction  
+                );
+            }
+           // echo var_dump($logs);
+            echo json_encode($mylog);
             Yii::app()->end();
         }
 }

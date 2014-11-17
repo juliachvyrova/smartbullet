@@ -39,7 +39,6 @@ foreach ($model->chatmsg as $chat){
     echo CHtml::beginForm();
     echo CHtml::hiddenField('user_id' , Yii::app()->user->getId());
     echo CHtml::hiddenField('game_id' , $model->id);
-    echo CHtml::hiddenField('tern' , 1);
     echo CHtml::textField('msg'); 
     echo CHtml::ajaxSubmitButton('Отправить', 'index.php?r=game/polling&id=' . $model->id, array(
     'type' => 'POST',

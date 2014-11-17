@@ -1,36 +1,41 @@
 $(document).ready(function(){
+    flag = false; //flag of user choise
     MaxTime = $("#my_timer").html();
     startTimer();
     $('#output').animate({'scrollTop':999});
-    lol = $('#output').scrollTop();
+    bot = $('#output').scrollTop();
     setInterval(polling, 3000);
     $('input[type="submit"]').on('click',function(){
          $('#output').animate({'scrollTop':999});
     });
     $('.solut').on('click',function(){
+        flag = true;
         $('#choise').slideToggle(1500);
-        $.ajax({
-            url: 'index.php?r=game/fight&id=0',
-            type: "post",
-            dataType: "json",
-            data: {
-                "value" : des(this.value),
-                "select": des($('#direction option:selected').html()),
-                "tern": $('#tern').val()
-            },
-            success: function(data){
-                $('#field').html(' ');
-                $.each(data,function (){
-                    if(this.tern == $("#tern").val() ){
-                        $('#field').append(this.action + ' ');
-                    }
-                });    
-            }     
-        });
+        user_choise(des(this.value));
+        
     });
 });
 
-
+function user_choise(val)
+{
+    $.ajax({
+            url: 'index.php?r=game/fight&id=' +  $('#game_id').val(),
+            type: "post",
+            dataType: "json",
+            data: {
+                "value" : val,
+                "select": des($('#direction option:selected').html())
+                //"tern": $('#tern').val()
+            },
+            success: function(data){
+                $('#field').html('');
+                $.each(data,function (){
+                        $('#field').append('user: ' + this.user+ ' ' + 'action: '+ 
+                                this.action +' ' + 'tern: '+ this.tern + '<br>');
+                });    
+            }     
+        });
+}
 function polling(){
     $.ajax({
             url: 'index.php?r=game/polling&id=' + $('#game_id').val(),
@@ -42,7 +47,7 @@ function polling(){
             },
             success: function(data){
              $('#output').html(data.result) ;
-             if ($('#output').scrollTop() === lol)//scroll down if we in bottom of chat
+             if ($('#output').scrollTop() === bot)//scroll down if we in bottom of chat
                  $('#output').animate({'scrollTop':999});
             }
         });
@@ -73,7 +78,11 @@ function startTimer() {
           $('#choise').slideDown(1000);
           $("#my_timer").html(MaxTime);
           setTimeout(startTimer, 1000);
-          $("#tern").val(parseInt($("#tern").val())+1);
+          if(flag == true)
+              flag = false;
+          else {
+              user_choise(0);
+          }
           return;
     }
     my_timer--;
