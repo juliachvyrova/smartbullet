@@ -5,16 +5,26 @@ $(document).ready(function(){
     $('#output').animate({'scrollTop':999});
     bot = $('#output').scrollTop();
     setInterval(polling, 3000);
+    
     $('input[type="submit"]').on('click',function(){
          $('#output').animate({'scrollTop':999});
     });
+    
     $('.solut').on('click',function(){
         flag = true;
         $('#choise').slideToggle(1500);
         user_choise(des(this.value));
         
     });
+    
+    $('#send').on('click',function(){
+        send();
+        $('#msg').val('');
+        $('#output').animate({'scrollTop':999});
+    });
 });
+
+    
 
 function user_choise(val)
 {
@@ -36,19 +46,38 @@ function user_choise(val)
             }     
         });
 }
+
+function send(){
+    $.ajax({
+            url: 'index.php?r=game/polling&id=' + $('#game_id').val(),
+            type: "post",
+            dataType: "json",
+            data: {
+                "msg" : $('#msg').val()
+            },
+            success: function(data){
+                $('#output').html('');
+                $.each(data,function(){
+                    $('#output').append('<span class="user_name">'+ this.user +
+                            '</span>:' + this.text + '<br>');
+                });    
+        }
+    });
+}
 function polling(){
     $.ajax({
             url: 'index.php?r=game/polling&id=' + $('#game_id').val(),
             type: "post",
             dataType: "json",
             data: {
-                "msg" : '',
-                'polling': 0
+                "msg" : ''
             },
             success: function(data){
-             $('#output').html(data.result) ;
-             if ($('#output').scrollTop() === bot)//scroll down if we in bottom of chat
-                 $('#output').animate({'scrollTop':999});
+             $('#output').html('');
+                $.each(data,function(){
+                    $('#output').append('<span class="user_name">'+ this.user +
+                            '</span>:' + this.text + '<br>');
+                });
             }
         });
 }

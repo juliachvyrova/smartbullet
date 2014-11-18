@@ -52,10 +52,10 @@ class User extends CActiveRecord
 		return array(
 			'comments' => array(self::HAS_MANY, 'Comment', 'author_id'),
 			'posts' => array(self::HAS_MANY, 'Post', 'wall_id', 'order'=>'datetime DESC'),
-            'postsUser' => array(self::HAS_MANY, 'Post', 'author_id'),
-            'user1' => array(self::HAS_MANY, 'Relationship', 'user1'),
-            'user2' => array(self::HAS_MANY, 'Relationship', 'user2'),
-            'relationship' => array(self::HAS_MANY, 'Relationship', 'user2'),
+                        'postsUser' => array(self::HAS_MANY, 'Post', 'author_id'),
+                        'user1' => array(self::HAS_MANY, 'Relationship', 'user1'),
+                        'user2' => array(self::HAS_MANY, 'Relationship', 'user2'),
+                        'relationship' => array(self::HAS_MANY, 'Relationship', 'user2'),
 		);
 	}
 
@@ -105,8 +105,8 @@ class User extends CActiveRecord
 		$criteria->compare('rating',$this->rating);
 		$criteria->compare('photo',$this->photo,true);
 		$criteria->compare('data',$this->data,true);
-        $criteria->compare('first_name',$this->first_name,true);
-        $criteria->compare('last_name',$this->last_name,true);
+                $criteria->compare('first_name',$this->first_name,true);
+                $criteria->compare('last_name',$this->last_name,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

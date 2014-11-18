@@ -40,13 +40,14 @@ foreach ($model->chatmsg as $chat){
     echo CHtml::hiddenField('user_id' , Yii::app()->user->getId());
     echo CHtml::hiddenField('game_id' , $model->id);
     echo CHtml::textField('msg'); 
-    echo CHtml::ajaxSubmitButton('Отправить', 'index.php?r=game/polling&id=' . $model->id, array(
+    /*echo CHtml::ajaxSubmitButton('Отправить', 'index.php?r=game/polling&id=' . $model->id, array(
     'type' => 'POST',
     'update' => '#output',
 ),
 array(
    'type' => 'submit'
-));
+));*/
+    echo "<input type='button' value='send' id='send'>";
     echo CHtml::endForm();
  ?>
 <style>

@@ -75,7 +75,7 @@ class UserController extends Controller
 		));*/
 
  				$id=Yii::app()->user->getId();
-                $dataProvider=new CActiveDataProvider('User',
+                /*$dataProvider=new CActiveDataProvider('User',
                 array(
                 'pagination'=>array('pageSize'=>10),
                 'criteria'=>array(
@@ -87,22 +87,22 @@ class UserController extends Controller
                 'together'=>true,
                 ),
                 )
-                );
-                $count=  Relationship::countFriends($id);
+                );*/
+                /*$count=  Relationship::countFriends($id);*/
                 
-                if ($count==0) $title="У вас пока нет друзей";
+               /* if ($count==0) $title="У вас пока нет друзей";
                 else $title="Друзья (".$count.")";
 
                 $this->render('friends',array(
                 'model'=>$dataProvider,
                 'count'=>  Relationship::countFriends($id),
                 'title'=>$title,
-                ));
+                ));*/
 	}
 
 			public function actionRequests(){
 		 		$id=Yii::app()->user->getId();
-		        $dataProvider=new CActiveDataProvider('User',
+		        /*$dataProvider=new CActiveDataProvider('User',
 		        array(
 		        'pagination'=>array('pageSize'=>10),
 		        'criteria'=>array(
@@ -114,8 +114,8 @@ class UserController extends Controller
 		        'together'=>true,
 		        ),
 		        )
-		        );
-		        $count=  Relationship::countRequests($id);
+		        );*/
+		       /* $count=  Relationship::countRequests($id);
 		        
 		        if ($count==0) $title="У вас пока нет заявок";
 		        else $title="Заявки в друзья (".$count.")";
@@ -124,7 +124,7 @@ class UserController extends Controller
 		        'model'=>$dataProvider,
 		        'count'=>  Relationship::countFriends($id),
 		        'title'=>$title,
-                ));
+                ));*/
 			}
 
 
@@ -135,7 +135,7 @@ class UserController extends Controller
 
 			public function actionMyRequests(){
 		 		$id=Yii::app()->user->getId();
-		        $dataProvider=new CActiveDataProvider('User',
+		       /* $dataProvider=new CActiveDataProvider('User',
 		        array(
 		        'pagination'=>array('pageSize'=>10),
 		        'criteria'=>array(
@@ -157,7 +157,7 @@ class UserController extends Controller
 		        'model'=>$dataProvider,
 		        'count'=>  Relationship::countFriends($id),
 		        'title'=>$title,
-                ));
+                ));*/
 			}
 
 

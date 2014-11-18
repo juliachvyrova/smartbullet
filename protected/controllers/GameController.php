@@ -49,28 +49,24 @@ class GameController extends Controller
 
 	public function actionPolling($id){
             
-               $textmsg = $_POST['msg'];
-               if($textmsg != ''){ //add messege
+               $textMsg = $_POST['msg'];
+               if($textMsg != ''){ //add messege
                   // $user_id = $_POST['user_id'];
                    $msg = new Chatmsg();
                    $msg->author_id = Yii::app()->user->getId();
-                   $msg->text = $textmsg;
+                   $msg->text = $textMsg;
                    $msg->game_id = $id;
                    $msg->save();
                }
-               $str = '';
+               $chatMsgs = array();
                $model = $this->loadModel($id);
                foreach ($model->chatmsg as $chat){ //view all chat messeges
                        if($chat->author <> NULL){
-                            $str.= '<span class="user_name">'.$chat->author->login.'</span>: ';
-                            $str.= $chat->text.'<br>';
+                           $chatMsgs[$chat->id]= array('user'=>$chat->author->login,
+                               'text' => $chat->text);
                       }
                } 
-               if (isset($_POST['polling'])){ //if myscript.js calling
-                   echo json_encode(array(
-                       'result' => $str,
-                   ));
-               }else   echo $str;   
+               echo json_encode($chatMsgs);   
                Yii::app()->end();
         }
 
