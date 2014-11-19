@@ -2,16 +2,18 @@ $(document).ready(function(){
     flag = false; //flag of user choise
     MaxTime = $("#my_timer").html();
     startTimer();
-    $('#output').animate({'scrollTop':999});
-    bot = $('#output').scrollTop();
-    setInterval(polling, 3000);
+    $('#output').animate({'scrollTop': 99999999});
+    setInterval(chatPolling, 3000);
     
-    $('input[type="submit"]').on('click',function(){
-         $('#output').animate({'scrollTop':999});
-    });
+   /* $('input[type="submit"]').on('click',function(){
+         $('#output').animate({'scrollTop':9999});
+    });*/
     
     $('.solut').on('click',function(){
         flag = true;
+        $.each( $('.solut') , function(){
+            this.disabled = true;
+        });
         $('#choise').slideToggle(1500);
         user_choise(des(this.value));
         
@@ -20,7 +22,7 @@ $(document).ready(function(){
     $('#send').on('click',function(){
         send();
         $('#msg').val('');
-        $('#output').animate({'scrollTop':999});
+        $('#output').animate({'scrollTop': 999999});
     });
 });
 
@@ -40,8 +42,10 @@ function user_choise(val)
             success: function(data){
                 $('#field').html('');
                 $.each(data,function (){
-                        $('#field').append('user: ' + this.user+ ' ' + 'action: '+ 
-                                this.action +' ' + 'tern: '+ this.tern + '<br>');
+                        $('#field').append('tern: '+ this.tern + 
+                                ' user: ' + this.user + 
+                                ' action: '+ this.action +
+                                ' result: '+ this.result + '<br>');
                 });    
             }     
         });
@@ -49,7 +53,7 @@ function user_choise(val)
 
 function send(){
     $.ajax({
-            url: 'index.php?r=game/polling&id=' + $('#game_id').val(),
+            url: 'index.php?r=game/chatPolling&id=' + $('#game_id').val(),
             type: "post",
             dataType: "json",
             data: {
@@ -64,9 +68,27 @@ function send(){
         }
     });
 }
-function polling(){
+function chatPolling(){
     $.ajax({
-            url: 'index.php?r=game/polling&id=' + $('#game_id').val(),
+            url: 'index.php?r=game/chatPolling&id=' + $('#game_id').val(),
+            type: "post",
+            dataType: "json",
+            data: {
+                "msg" : ''
+            },
+            success: function(data){
+             $('#output').html('');
+                $.each(data,function(){
+                    $('#output').append('<span class="user_name">'+ this.user +
+                            '</span>:' + this.text + '<br>');
+                });
+            }
+        });
+}
+
+function gamePolling(){
+    $.ajax({
+            url: 'index.php?r=game/chatPolling&id=' + $('#game_id').val(),
             type: "post",
             dataType: "json",
             data: {
@@ -104,15 +126,18 @@ function des(data){
 function startTimer() {
     var my_timer = $("#my_timer").html();
     if (my_timer == 0) {
-          $('#choise').slideDown(1000);
-          $("#my_timer").html(MaxTime);
-          setTimeout(startTimer, 1000);
-          if(flag == true)
-              flag = false;
-          else {
-             // user_choise(0);
-          }
-          return;
+        $.each( $('.solut') , function(){
+            this.disabled = false;
+        });
+        $('#choise').slideDown(1000);
+        $("#my_timer").html(MaxTime);
+        setTimeout(startTimer, 1000);
+        if(flag == true)
+            flag = false;
+        else {
+            // user_choise(0);
+        }
+        return;
     }
     my_timer--;
     $("#my_timer").html(my_timer);

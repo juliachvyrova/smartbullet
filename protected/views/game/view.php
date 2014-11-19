@@ -4,6 +4,9 @@
     $cs->registerScriptFile($baseUrl.'/js/myscript.js');
 ?>
 <h1>SmartBullet</h1>
+<marquee  direction="left" bgcolor="#ffcc00" width='200'>
+    Lorem ipsum dolor sit amet...
+  </marquee>
 <div id="my_timer">10</div>
 <div class="game_win">
     <div id="field"></div>
@@ -87,8 +90,15 @@ array(
         width: auto;
     }
     
+    
+    @font-face {
+        font-family: timer;
+        src: url(fonts/timer.ttf);
+    }
+    
     #my_timer{
-        font-size: 16px;
+        font-family: timer;
+        font-size: 32px;
         color: sandybrown;
     }
 </style>

@@ -1,23 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "post".
+ * This is the model class for table "game_map".
  *
- * The followings are the available columns in table 'post':
+ * The followings are the available columns in table 'game_map':
  * @property integer $id
- * @property integer $author_id
- * @property string $text
- * @property integer $wall_id
- * @property string $datetime
+ * @property integer $game_id
+ * @property integer $user_count
+ * @property integer $user1
+ * @property integer $user2
+ * @property integer $user3
+ * @property integer $user4
+ * @property integer $user5
+ * @property integer $user6
  */
-class Post extends CActiveRecord
+class GameMap extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'post';
+		return 'game_map';
 	}
 
 	/**
@@ -28,11 +32,10 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, author_id, wall_id', 'numerical', 'integerOnly'=>true),
-			array('text, datetime', 'safe'),
+			array('game_id, user_count, user1, user2, user3, user4, user5, user6', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, author_id, text, wall_id, datetime', 'safe', 'on'=>'search'),
+			array('id, game_id, user_count, user1, user2, user3, user4, user5, user6', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -42,14 +45,15 @@ class Post extends CActiveRecord
 	public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.              
-                return array(
-			'comments' => array(self::HAS_MANY, 'Comment', 'post_id', 'order'=>'datetime ASC'),
-                        'walls' => array(self::HAS_MANY, 'Comment', 'wall_id', 'order'=>'datetime ASC'),
-			'author' => array(self::BELONGS_TO, 'User', 'wall_id'),
-                    	'user' => array(self::BELONGS_TO, 'User', 'author_id'),
-                        'count'=>array(self::STAT, 'Comment', 'post_id'),
-                
+		// class name for the relations automatically generated below.
+		return array(
+                    'game' => array(self::BELONGS_TO, 'Game', 'game_id'),
+                    'user1' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'user2' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'user3' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'user4' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'user5' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'user6' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -60,10 +64,14 @@ class Post extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'author_id' => 'Author',
-			'text' => 'Text',
-			'wall_id' => 'Wall',
-			'datetime' => 'Datetime',
+			'game_id' => 'Game',
+			'user_count' => 'User Count',
+			'user1' => 'User1',
+			'user2' => 'User2',
+			'user3' => 'User3',
+			'user4' => 'User4',
+			'user5' => 'User5',
+			'user6' => 'User6',
 		);
 	}
 
@@ -86,10 +94,14 @@ class Post extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('author_id',$this->author_id);
-		$criteria->compare('text',$this->text,true);
-		$criteria->compare('wall_id',$this->wall_id);
-		$criteria->compare('datetime',$this->datetime,true);
+		$criteria->compare('game_id',$this->game_id);
+		$criteria->compare('user_count',$this->user_count);
+		$criteria->compare('user1',$this->user1);
+		$criteria->compare('user2',$this->user2);
+		$criteria->compare('user3',$this->user3);
+		$criteria->compare('user4',$this->user4);
+		$criteria->compare('user5',$this->user5);
+		$criteria->compare('user6',$this->user6);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -100,7 +112,7 @@ class Post extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Post the static model class
+	 * @return GameMap the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -42,6 +42,7 @@ class Game extends CActiveRecord
 		return array(
                     'chatmsg' => array(self::HAS_MANY, 'Chatmsg', 'game_id'),
                     'loggame' => array(self::HAS_MANY, 'LogGame', 'game_id'),
+                    'map' => array(self::HAS_ONE, 'GameMap', 'game_id'),
 		);
 	}
 
