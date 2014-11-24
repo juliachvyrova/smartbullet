@@ -1,10 +1,11 @@
+    DAMAGE = 20;
+    wariors = [];
 $(document).ready(function(){
     //disable user control while dont get map
     $.each( $('.solut') , function(){
             this.disabled = true;
     });
-    
-    wariors = [];
+
     giveMap();
     /*for(i = 0; i < 6; i++)
     {
@@ -15,7 +16,7 @@ $(document).ready(function(){
     MaxTime = $("#my_timer").html();
 
     $('#output').animate({'scrollTop': 99999999});
-    setInterval(chatPolling, 3000);
+    //setInterval(chatPolling, 3000);
     
     $('.solut').on('click',function(){
         flag = true;
@@ -51,13 +52,14 @@ function giveMap()
                 {
                     makeField();
                     for(i = 1; i < 7; i++){
-                         wariors[i]= new Warior(data[i]);
-                         $('#w'+i + ' b').html(data['l'+i]);
+                         wariors[i-1]= new Warior(data[i]);
+                         $('#w'+i + ' b').html(data['l'+(i)]);
                     }
                     
                     $.each( $('.solut') , function(){
                         this.disabled = false;
                     });
+                    //console.log(data);
                     startTimer();
                 }
             }     
@@ -142,9 +144,10 @@ function gamePolling(){
             dataType: "json",
             success: function(data){
                 if(data.result){
-                    setTimeout(gamePolling(),5000);
+                    setTimeout(gamePolling,3000);
                 }else{
-                    //play(data);
+                    play(data);
+                   // console.log(data);
                     $('#choise').slideDown(1000);
                     $("#my_timer").html(MaxTime);
                     setTimeout(startTimer, 1000);
@@ -199,10 +202,39 @@ function Warior(id){
     this.hp = 100;
     this.dead = false;
 }
-window.onbeforeunload = function(){
+/*window.onbeforeunload = function(){
     $.ajax({
             url: 'index.php?r=game/gamerExit&id=' + $('#game_id').val(),
             type: "post",
             dataType: "json",
         });
-};
+};*/
+                        
+function play(data)
+{
+    console.log(data);
+    console.log(wariors);
+    $.each(data,function (){
+        for(i = 0; i < 6; i++)
+        {
+            if(this.user == wariors[i].id)
+            {
+                if(this.action == 1){
+                      //  console.log(wariors[i]);
+                        if( i < 3)
+                        {
+                            hit(2 + parseInt(this.direction));
+                        }else{
+                            hit(parseInt(this.direction) -1);
+                        }
+                }
+            }
+        }
+    });
+}
+
+function hit(place)
+{
+    wariors[place] -= 20;
+    $('#w' + (place +1) +'.hp').css('width','20px');
+}

@@ -12,7 +12,7 @@
 <div class="span-5" id="left-menu">
 	<div>
 
-        <?php /*echo "<a href=/smartbullet/index.php?r=user/view&id=".Yii::app()->user->GetId().">моя страница</a>" ;*/?>
+        <?php echo "<a href=/smartbullet/index.php?r=user/view&id=".Yii::app()->user->GetId().">моя страница</a>" ;?>
 
             <ul>
             <li><div class="mini-photo"></div><br>
