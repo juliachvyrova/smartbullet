@@ -48,12 +48,12 @@ class GameMap extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'game' => array(self::BELONGS_TO, 'Game', 'game_id'),
-                    'user1' => array(self::BELONGS_TO, 'User', 'user_id'),
-                    'user2' => array(self::BELONGS_TO, 'User', 'user_id'),
-                    'user3' => array(self::BELONGS_TO, 'User', 'user_id'),
-                    'user4' => array(self::BELONGS_TO, 'User', 'user_id'),
-                    'user5' => array(self::BELONGS_TO, 'User', 'user_id'),
-                    'user6' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'userM1' => array(self::BELONGS_TO, 'User', 'user1'),
+                    'userM2' => array(self::BELONGS_TO, 'User', 'user2'),
+                    'userM3' => array(self::BELONGS_TO, 'User', 'user3'),
+                    'userM4' => array(self::BELONGS_TO, 'User', 'user4'),
+                    'userM5' => array(self::BELONGS_TO, 'User', 'user5'),
+                    'userM6' => array(self::BELONGS_TO, 'User', 'user6'),
 		);
 	}
 
