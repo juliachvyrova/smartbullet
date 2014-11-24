@@ -257,7 +257,8 @@ class GameController extends Controller
                         'user' => $log->user_id,
                         'tern' => $log->tern,
                         'action' => $log->action,
-                        'direction' => $log->direction  
+                        'direction' => $log->direction,
+                        'result' => $log->result
                     );
                 }
                 echo json_encode($mylog);
