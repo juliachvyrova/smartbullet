@@ -65,6 +65,7 @@
                         'itemView' => '/user/_wall',
                         'sorterHeader' => 'Сортировать по:',
                         'summaryText' => "",
+                        'pagerCssClass'=>'custom-pager',
                     )); 
                 }
             ?>
