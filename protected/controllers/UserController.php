@@ -28,11 +28,11 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','go'),
+				'actions'=>array('go'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','view','friends','serch','requests','myRequests'),
+				'actions'=>array('index','create','update','view','friends','serch','requests','myRequests','find','changePass'/*,'messageTo'*/),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,53 +51,55 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
+	    $dataProvider=new CActiveDataProvider('Post',
+	    array(
+	    'pagination'=>array('pageSize'=>5),
+	    'criteria'=>array(
+	    'with'=>array(
+	    'user' => array('alias' => 'pu')
+	    ),
+	    'condition' => ' wall_id='.$id,
+	    'order'=>'datetime DESC',
+	    //'distinct'=>true,
+	    'together'=>true,
+	    ),
+	    )
+	    );
+
+
+
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+			'post'=>$dataProvider,
 		));
 	}
 
 	public function actionFriends()
 	{
 		$id=Yii::app()->user->getId();
-		$crit=new CDbCriteria;
-        $crit->condition='user1=:u AND type=0';
-        $crit->params=array(
-            ':u'=>$id,
-        );
+	    $dataProvider=new CActiveDataProvider('User',
+	    array(
+	    'pagination'=>array('pageSize'=>10),
+	    'criteria'=>array(
+	    'with'=>array(
+	    'relationship' => array('alias' => 'pu')
+	    ),
+	    'condition' => ' pu.user1='.$id.' AND pu.type=0',
+	    //'distinct'=>true,
+	    'together'=>true,
+	    ),
+	    )
+	    );
+	    $count=  Relationship::countFriends($id);
+	    
+	    if ($count==0) $title="У вас пока нет друзей";
+	    else $title="Друзья (".$count.")";
 
-        $count=  Relationship::model()->count($crit);
-
-		//$id=Yii::app()->user->getId();
-		//parent::count($condition, $params);
-		$this->render('friends',array(
-			'model'=>$this->loadModel($id),//Relationship::loadModel()->find($crit),//
-			'count'=>$count,
-		));
-
- 				$id=Yii::app()->user->getId();
-                $dataProvider=new CActiveDataProvider('User',
-                array(
-                'pagination'=>array('pageSize'=>10),
-                'criteria'=>array(
-                'with'=>array(
-                'relationship' => array('alias' => 'pu')
-                ),
-                'condition' => ' pu.user1='.$id.' AND pu.type=0',
-                //'distinct'=>true,
-                'together'=>true,
-                ),
-                )
-                );
-                $count=  Relationship::countFriends($id);
-                
-                if ($count==0) $title="У вас пока нет друзей";
-                else $title="Друзья (".$count.")";
-
-                $this->render('friends',array(
-                'model'=>$dataProvider,
-                'count'=>  Relationship::countFriends($id),
-                'title'=>$title,
-                ));
+	    $this->render('friends',array(
+	    'model'=>$dataProvider,
+	    'count'=>  Relationship::countFriends($id),
+	    'title'=>$title,
+	    ));
 	}
 
 			public function actionRequests(){
@@ -161,6 +163,36 @@ class UserController extends Controller
 			}
 
 
+		/*	public function actionMessageTo(){
+				echo "string";
+		 		$id=Yii::app()->user->getId();
+		        $dataProvider=new CActiveDataProvider('User',
+		        array(
+		        'pagination'=>array('pageSize'=>10),
+		        'criteria'=>array(
+		        'with'=>array(
+		        'message_to' => array('alias' => 'pu')
+		        ),
+		        'condition' => '',// pu.user_to='.$id,
+		        //'distinct'=>true,
+		        'together'=>true,
+		        ),
+		        )
+		        );
+		        echo "123";
+		        $count=  Message::countMessageTo($id);
+		        
+		        if ($count==0) $title="У вас нет входящих сообщений";
+		        else $title="Сообщения (".$count.")";
+
+		        $this->render('message',array(
+		        'model'=>$dataProvider,
+		        'count'=>  Message::countMessageTo($id),
+		        'title'=>$title,
+                ));
+			}
+*/
+
 
 	/**
 	 * Creates a new model.
@@ -190,8 +222,9 @@ class UserController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate()
 	{
+		$id=$id=Yii::app()->user->getId();
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -199,14 +232,67 @@ class UserController extends Controller
 
 		if(isset($_POST['User']))
 		{
+			//echo "string ";
+			$model->image=CUploadedFile::getInstance($model,'image');
 			$model->attributes=$_POST['User'];
-			if($model->save())
+			if ($model->brth2==NULL) $model->brth=NULL;
+			else{	$b=strtotime($model->brth2);
+				$b= date('Y-m-d', $b );
+				$model->brth=$b;
+				$model->brth2=NULL;}
+
+				//print_r($model->attributes);
+
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id));
+			}
+
 		}
+		
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+
+
+	public function actionChangePass(){
+
+		$id=$id=Yii::app()->user->getId();
+		$model=$this->loadModel($id);
+		$model->setScenario('changePass');
+
+		if(isset($_POST['User']))
+		{
+						$model->attributes=$_POST['User'];
+			//$model->image=CUploadedFile::getInstance($model,'image');
+			//$model->attributes=$_POST['User'];
+			//if ($model->brth2==NULL) $model->brth=NULL;
+			/*else{	$b=strtotime($model->brth2);
+				$b= date('Y-m-d', $b );
+				$model->brth=$b;
+				$model->brth2=NULL;}
+
+				//print_r($model->attributes);
+*/
+			/*if($model->save()){
+				$this->redirect(array('view','id'=>$model->id));
+			}*/
+
+			if($model->password2()){
+				//$model->password=$model->password3;
+			if($model->save())
+				//new UserIdentity($model->login,$model->password);
+				//$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id));
+			}
+		}
+		
+
+		$this->render('changePass',array(
+			'model'=>$model,
+		));
+
 	}
 
 	/**
@@ -230,24 +316,48 @@ class UserController extends Controller
 	{
 		$dataProvider=new CActiveDataProvider('User', array(
         'pagination'=>array('pageSize'=>10),
+
+
 		));
 
         
 
-        $this->render('friends',array(
+        $this->render('search',array(
         'model'=>$dataProvider,
         'count'=>  "0",
-        'title'=>"Пользователи",
+        'title'=>"Все пользователи",
         ));
-
-
-
-
-		/*$dataProvider=new CActiveDataProvider('User');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));*/
 	}
+
+	public function actionFind()
+	{
+
+		/*$dataProvider=new CActiveDataProvider('User', array(
+			'pagination'=>array('pageSize'=>10),
+			'criteria'=>array(
+			'condition'=>'login='.$login,
+			'order'=>'rating DESC',
+			),
+			));*/
+if (isset(/*$login=*/$_POST["login"])){
+	$login=$_POST["login"];
+$dataProvider=new CActiveDataProvider('User', array(
+			'pagination'=>array('pageSize'=>10),
+			'criteria'=>array(
+				'condition'=>"login LIKE '%$login%' OR first_name LIKE '%$login%' OR last_name LIKE '%$login%'",
+			//'condition'=>"login LIKE '%$login%'",
+			'order'=>'rating DESC',
+			),
+			));
+
+        
+		$count=  User::countLogin($login);
+        $this->render('search',array(
+        'model'=>$dataProvider,
+        'count'=>  $count,
+        'title'=>"Поиск по <i>".$login."</i> (".$count.")",
+        ));
+	}}
 
 	/**
 	 * Manages all models.

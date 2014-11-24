@@ -46,10 +46,13 @@ class UserIdentity extends CUserIdentity
 		return !$this->errorCode;*/
 
     
-        $record=User::model()->findByAttributes(array('login'=>$this->username));
+       $record=User::model()->findByAttributes(array('login'=>$this->username));
+       /*  echo crypt($this->password, $record->password)." === ". $record->password." 5 5 5 5 5 ".$record->password; /*=== $record->password*///  $record->password." ".CPasswordHelper::hashPassword($this->password);//$this->password;
+
         if($record===null)
             $this->errorCode=self::ERROR_USERNAME_INVALID;
-        else if ($this->password!=$record->password)//(!CPasswordHelper::verifyPassword($this->password,$record->password))
+
+        else if (crypt($this->password, $record->password)!== $record->password)//($this->password!=$record->password)//(!CPasswordHelper::verifyPassword($this->password,$record->password))//
             $this->errorCode=self::ERROR_PASSWORD_INVALID;
         else
         {

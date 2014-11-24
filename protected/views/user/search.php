@@ -1,10 +1,18 @@
-<nav>
-	<a href="/smartbullet/index.php?r=user/friends"> Друзья </a>
-	<a href="/smartbullet/index.php?r=user/requests"> Заявки в друзья <?php $c=Relationship::newRequests(Yii::app()->user->GetId()); if($c>0) echo " +".$c;?></a>
-	<a href="/smartbullet/index.php?r=user/myrequests"> Мои заявки </a>	
-</nav>
-	<h1><?php echo $title?></h1>
+<!--nav>
+	<a href="/smartbullet/index.php?r=user"> Все пользователи </a>
+	<a href="/smartbullet/index.php?r=user/requests"> Поиск по логину <?php $c=Relationship::newRequests(Yii::app()->user->GetId()); if($c>0) echo " +".$c;?></a>
+	<a href="/smartbullet/index.php?r=user/myrequests"> Поиск по имени фамилии </a>	
+</nav-->
 
+<form method="post" action="/smartbullet/index.php?r=user/find" id="search">
+<input name="login" value="" placeholder="поиск пользователей" id="searchStr" style=""> 
+
+<!--input type=submit value="искать">
+<input src="http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png" type="image" style="vertical-align: bottom; padding: 0;"/-->
+
+
+</form>
+	<h1><?php echo $title?></h1>
 
 
 <?php $this->widget('zii.widgets.CListView', array(

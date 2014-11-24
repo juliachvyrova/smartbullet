@@ -1,9 +1,3 @@
-<?php
-/* @var $this UserController */
-/* @var $model User */
-/* @var $form CActiveForm */
-?>
-
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -13,11 +7,50 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
-	        'htmlOptions'=>array('enctype'=>'multipart/form-data'),
-)); ?>
+
+        'htmlOptions'=>array('enctype'=>'multipart/form-data'),
+        )); ?>
+<h1>Форма регистрации</h1>
+	<p class="note registration" >Поля с <span class="required">*</span> обязательны для заполнения</p>
+
+	<!--?php echo $form->errorSummary($model); ?-->
+
+	<!--div class="row">
+		<?php echo $form->labelEx($model,'id'); ?>
+		<?php echo $form->textField($model,'id'); ?>
+		<?php echo $form->error($model,'id'); ?>
+	</div-->
 
 	<table class="registration" >
-		
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'login'); ?>
+			</td>
+			<td>
+				<?php echo $form->textField($model,'login',array('size'=>32,'maxlength'=>32)); ?>
+				<?php echo $form->error($model,'login'); ?> 
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'password'); ?>
+			</td>
+			<td>
+				<?php echo $form->passwordField($model,'password',array('size'=>32,'maxlength'=>32)); ?>
+				<?php echo $form->error($model,'password'); ?>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'password2'); ?>
+			</td>
+			<td>
+				<?php echo $form->passwordField($model,'password2',array('size'=>32,'maxlength'=>32)); ?>
+				<?php echo $form->error($model,'password2'); ?>
+			</td>
+		</tr>
 
 		<tr>
 			<td>
@@ -91,28 +124,20 @@
 				<?php echo $form->error($model,'image'); ?>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<?php echo $form->labelEx($model,'delPhoto'); ?>
-			</td>
-			<td>
-				<?php echo $form->checkBox($model,'delPhoto'); ?>
-			</td>
-		</tr>
 
 		<tr>
 			<td>
 			</td>
 			<td>
-
-
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Зарегистрироваться' : 'Сохранить'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Зарегистрироваться' : 'Save'); ?>
+		<input type="button" onclick="location.href='<?php echo Yii::app()->createUrl("site/login");?>'" value="Назад">
 	</div>
 			</td>
 		</tr>
 	</table>
-	
+
+
 
 <?php $this->endWidget(); ?>
 

@@ -27,20 +27,9 @@ class CommentController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','add','del'),
+				'actions'=>array(/*'create','update',*/'add','del'/*,'index','view'*/),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
 			),
 		);
 	}
@@ -49,18 +38,18 @@ class CommentController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	/*public function actionView($id)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
-
+*/
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	/*public function actionCreate()
 	{
 		$model=new Comment;
 
@@ -77,14 +66,14 @@ class CommentController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
-	}
+	}*/
 
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	/*public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
 
@@ -101,37 +90,37 @@ class CommentController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
-	}
+	}*/
 
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	/*public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
+	}*/
 
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+/*public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('Comment');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
-	}
+	}*/
 
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	/*public function actionAdmin()
 	{
 		$model=new Comment('search');
 		$model->unsetAttributes();  // clear any default values
@@ -141,7 +130,7 @@ class CommentController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
-	}
+	}*/
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -171,54 +160,39 @@ class CommentController extends Controller
 		}
 	}
 
-		public function actionAdd()
-        {
-        	echo "string";
-        	 if (isset($_POST["wall"])) echo $_POST["wall"];
-        	 if (isset($_POST["text1"])) echo $_POST["text1"];
-            if (isset($_POST["wall"]) && isset($_POST["text1"]))
-            {   
-                
-                $author=Yii::app()->user->getId();
-                $text=$_POST["text1"];
-                $post=$_POST["wall"];
-                $time=date("y-m-d H:i:s");
-                $model=new Comment;
-                $model->author_id=$author;
-                $model->text=$text;
-                $model->post_id=$post;
-                $model->datetime=$time;
-    	        if($model->validate()){
-                    $model->save();
-                }
-                echo "Julia!";
-                Yii::app()->end();
+	public function actionAdd()
+    {
+        if (isset($_POST["wall"]) && isset($_POST["text1"]))
+        {       
+            $author=Yii::app()->user->getId();
+            $text=$_POST["text1"];
+            $post=$_POST["wall"];
+            $time=date("y-m-d H:i:s");
+            $model=new Comment;
+            $model->author_id=$author;
+            $model->text=$text;
+            $model->post_id=$post;
+            $model->datetime=$time;
+	        if($model->validate()) {
+                $model->save();
             }
+            Yii::app()->end();
         }
+    }
 
-                public function actionDel()
-        {
-        	echo "Del!";
-        	if (isset($_POST["comment"]))
-            {   
-                echo "Del2!";
-                //$u1=Yii::app()->user->getId();
-                $num=$_POST["comment"];
-                $crit=new CDbCriteria;
-                $crit->condition='id=:comment';                
-                //$crit->condition='user1=:u AND user2=:f AND type=0';
-                $crit->params=array(
-                    'comment'=>$num,
-                );
-
-
-                $model=  Comment::model()->find($crit);
-                $model->delete();
-               
-
-                    echo 'You stop folow!';
-                   
-                Yii::app()->end();
-            }
+    public function actionDel()
+    {
+    	if (isset($_POST["comment"]))
+        {   
+            $num=$_POST["comment"];
+            $crit=new CDbCriteria;
+            $crit->condition='id=:comment';                
+            $crit->params=array(
+                'comment'=>$num,
+            );
+            $model=  Comment::model()->find($crit);
+            $model->delete();              
+            Yii::app()->end();
         }
+    }
 }

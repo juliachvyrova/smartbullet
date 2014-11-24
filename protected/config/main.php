@@ -7,7 +7,8 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'SmartBullet',
+    	'language'=>'ru',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -36,17 +37,37 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+            
+            
+              'widgetFactory' => array(
+            'widgets' => array(
+                'CLinkPager' => array(
+                    'header' => '',
+                    'nextPageLabel'=>'→',
+                    'prevPageLabel'=>'←',
+                    'lastPageLabel'=>'»',
+                    'firstPageLabel'=>'«',
+                    'selectedPageCssClass' => 'active',
+                    'hiddenPageCssClass' => 'disabled',
+                    'htmlOptions' => array(
+                        'class' => 'pagination pagination-centered',
+                        'style' => 'padding-left: 33% !important',
+                    ),
+                ),
+            ),
+        ),
 		// uncomment the following to enable URLs in path-format
-		/*
+		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+                        'showScriptName' => false,
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
+		
 		/*'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),

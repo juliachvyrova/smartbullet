@@ -53,7 +53,7 @@ class SiteController extends Controller
 	/**
 	 * Displays the contact page
 	 */
-	public function actionContact()
+	/*public function actionContact()
 	{
 		$model=new ContactForm;
 		if(isset($_POST['ContactForm']))
@@ -74,19 +74,14 @@ class SiteController extends Controller
 			}
 		}
 		$this->render('contact',array('model'=>$model));
-	}
+	}*/
 
 	/**
 	 * Displays the login page
 	 */
 	public function actionLogin()
 	{
-		/*$identity=new UserIdentity($username,$password);
-		if($identity->authenticate())
-    		Yii::app()->user->login($identity);
-		else
-    		echo $identity->errorMessage;*/
-    		 if (Yii::app()->user->isGuest) {
+    	if (Yii::app()->user->isGuest) {
 		$model=new LoginForm;
 
 		// if it is ajax validation request
@@ -106,9 +101,10 @@ class SiteController extends Controller
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
+		} else {
+			$this->redirect(array('/user/view','id'=>Yii::app()->user->GetId()));
+		}
 	}
-	else{$this->redirect(array('/user/view','id'=>Yii::app()->user->GetId()));}
-}
 
 	/**
 	 * Logs out the current user and redirect to homepage.
@@ -117,5 +113,38 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+        
+    public function actionRegistration()
+	{
+        $model=new User;
+		$model->setScenario('registration');
+
+		if(isset($_POST['User']))
+		{            
+            $model->image=CUploadedFile::getInstance($model,'image');
+			$model->attributes=$_POST['User'];
+			$model->data=date("Y-m-d");
+			$model->rating=0;
+			if ($model->brth2==NULL) {
+				$model->brth=NULL;
+			} else {	
+				$b=strtotime($model->brth2);
+				$b= date('Y-m-d', $b );
+				$model->brth=$b;
+			}	
+			if($model->save()) {
+				$this->redirect(Yii::app()->user->returnUrl);
+				//new UserIdentity($model->login,$model->password);
+				//Yii::app()->user=$model;
+				//$this->redirect(array('view','id'=>$model->id));
+				//if($model->validate() && $model->login())
+				//$this->redirect(Yii::app()->user->returnUrl);}
+			}
+		}
+
+		$this->render('registration',array(
+			'model'=>$model,
+		));
 	}
 }

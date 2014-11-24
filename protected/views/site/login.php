@@ -52,7 +52,8 @@ $this->breadcrumbs=array(
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Вход'); ?>
-		<a href="/smartbullet/index.php?r=site/registration" class="button">Регистраци</a>
+		<!--a href="/smartbullet/index.php?r=site/registration" class="button">Регистраци</a-->
+		<input type="button" onclick="location.href='<?php echo Yii::app()->createUrl("site/registration");?>'" value="Регистрация">
 	<!--input type="button" value="Регистрация"></input-->
 </div>
 
