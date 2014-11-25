@@ -197,10 +197,8 @@ class PostController extends Controller
 
         public function actionDel()
         {
-        	echo "Del!";
         	if (isset($_POST["num"]))
             {   
-                echo "Del2!";
                 //$u1=Yii::app()->user->getId();
                 $num=$_POST["num"];
                 $crit=new CDbCriteria;
@@ -224,14 +222,46 @@ class PostController extends Controller
                 
                 $model=  Post::model()->find($crit);
                 $model->delete();
-
-                
-              
-
-                    echo 'You stop folow!';
                    
                 Yii::app()->end();
             }
         }
+
+
+        /*
+public function actionDel()
+        {
+        	if (isset($_POST["num"]))
+            {   
+                $id=Yii::app()->user->getId();
+                $num=$_POST["num"];
+                $crit=new CDbCriteria;
+                $crit->condition='id=:post';
+                $crit->params=array(
+                    ':post'=>$num,
+                );               
+                $model=  Post::model()->find($crit);
+               if ($model->author_id==$id || $model->wall_id==$id){
+
+
+	                $crit=new CDbCriteria;
+	                $crit->condition='post_id=:post';                
+	                //$crit->condition='user1=:u AND user2=:f AND type=0';
+	                $crit->params=array(
+	                    'post'=>$num,
+	                );
+
+	                $count=  Comment::model2()->count($crit);
+	                if ($count>0){
+	                $model2=  Comment::model2()->find($crit);
+	                $model2->deleteAll();
+	               }	                
+               $model->delete();
+	           }
+
+                Yii::app()->end();
+            }
+        }
+        */
 
 }

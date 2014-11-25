@@ -1,7 +1,7 @@
 <?php
 /* @var $this UserController */
 /* @var $model User */
-
+/*
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
@@ -13,9 +13,15 @@ $this->menu=array(
 	array('label'=>'Create User', 'url'=>array('create')),
 	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage User', 'url'=>array('admin')),
-);
+);*/
 ?>
 
-<h1>Update User <?php echo $model->id; ?></h1>
+<nav>
+	<a href="<?php echo Yii::app()->createUrl("user/update");?>"> Редактировать информацию </a>
+	<a href="<?php echo Yii::app()->createUrl("user/changePass");?>"> Изменить пароль</a>
+</nav>
+<h1>Редактирование личной информиции</h1>
+
+
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

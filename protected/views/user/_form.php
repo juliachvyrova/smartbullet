@@ -13,74 +13,106 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+	        'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<table class="registration" >
+		
 
-	<?php echo $form->errorSummary($model); ?>
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'first_name'); ?>
+			</td>
+			<td>
+				<?php echo $form->textField($model,'first_name',array('size'=>32,'maxlength'=>32)); ?>
+				<?php echo $form->error($model,'first_name'); ?>
+			</td>
+		</tr>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'last_name'); ?>
+			</td>
+			<td>
+				<?php echo $form->textField($model,'last_name',array('size'=>32,'maxlength'=>32)); ?>
+				<?php echo $form->error($model,'last_name'); ?>
+			</td>
+		</tr>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'login'); ?>
-		<?php echo $form->textField($model,'login',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'login'); ?>
-	</div>
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'brth2'); ?>
+			</td>
+			<td>
+				<?php /*echo $form->textField($model,'brth');*/ ?>
+				<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+				   'name' => 'brth2',
+				   'model' => $model,
+				   //'mask' => '99.99.9999',
+				   'attribute' => 'brth2',
+				   'language' => 'ru',
+				   'options' => array(
+				       'showAnim' => 'fold',
+				   ),
+				   'htmlOptions' => array(
+				       'style' => 'height:18px; width:232px;'
+				   ),
+				));?>
+				<?php echo $form->error($model,'brth2'); ?>
+			</td>
+		</tr>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'password'); ?>
-	</div>
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'city'); ?>
+			</td>
+			<td>
+				<?php echo $form->textField($model,'city',array('size'=>32,'maxlength'=>32)); ?>
+				<?php echo $form->error($model,'city'); ?>
+			</td>
+		</tr>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'brth'); ?>
-		<?php echo $form->textField($model,'brth'); ?>
-		<?php echo $form->error($model,'brth'); ?>
-	</div>
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'email'); ?>
+			</td>
+			<td>
+				<?php echo $form->textField($model,'email',array('size'=>32,'maxlength'=>32)); ?>
+				<?php echo $form->error($model,'email'); ?>
+			</td>
+		</tr>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'city'); ?>
-		<?php echo $form->textField($model,'city',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'city'); ?>
-	</div>
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'image'); ?>
+			</td>
+			<td>
+		        <?php echo CHtml::activeFileField($model, 'image'); ?>
+				<?php echo $form->error($model,'image'); ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<?php echo $form->labelEx($model,'delPhoto'); ?>
+			</td>
+			<td>
+				<?php echo $form->checkBox($model,'delPhoto'); ?>
+			</td>
+		</tr>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'email'); ?>
-	</div>
+		<tr>
+			<td>
+			</td>
+			<td>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'rating'); ?>
-		<?php echo $form->textField($model,'rating'); ?>
-		<?php echo $form->error($model,'rating'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'photo'); ?>
-		<?php echo $form->textField($model,'photo',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'photo'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'data'); ?>
-		<?php echo $form->textField($model,'data'); ?>
-		<?php echo $form->error($model,'data'); ?>
-	</div>
-	<div class="row">
-		<?php echo $form->labelEx($model,'first_name'); ?>
-		<?php echo $form->textField($model,'first_name'); ?>
-		<?php echo $form->error($model,'first_name'); ?>
-	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Зарегистрироваться' : 'Сохранить'); ?>
 	</div>
+			</td>
+		</tr>
+	</table>
+	
 
 <?php $this->endWidget(); ?>
 
