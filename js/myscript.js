@@ -1,6 +1,8 @@
     DAMAGE = 20;
     wariors = [];
 $(document).ready(function(){
+    $('#aim').hide();
+    $('#miss').hide();
     //disable user control while dont get map
     $.each( $('.solut') , function(){
             this.disabled = true;
@@ -69,7 +71,7 @@ function giveMap()
 function makeWarior(selector,id)
 {
     $(selector).append('<div class="warior" id="w' + id + 
-            '"><b class="user-login"></b><div class="hp-bar"><div class="hp">  </div></div>\n\
+            '"><b class="user-login"></b><div class="hp-bar"><div class="hp2"><div class="hp">  </div></div></div>\n\
             <div class="war-img"></div></div>');
 }
 
@@ -146,8 +148,13 @@ function gamePolling(){
                 if(data.result){
                     setTimeout(gamePolling,3000);
                 }else{
-                    play(data);
-                   // console.log(data);
+                    var i = 0;
+                    $.each(data,function(){
+                        var self = this;
+                        setTimeout(function(){
+                           i = play(self,i);
+                        },1000);
+                    });
                     $('#choise').slideDown(1000);
                     $("#my_timer").html(MaxTime);
                     setTimeout(startTimer, 1000);
@@ -169,7 +176,7 @@ function des(data){
             return 1;
         case 'Dodge':
             return 2;
-        case 'Special':
+        case 'Heal':
             return 3;
     }
 }
@@ -202,39 +209,94 @@ function Warior(id){
     this.hp = 100;
     this.dead = false;
 }
-/*window.onbeforeunload = function(){
-    $.ajax({
-            url: 'index.php?r=game/gamerExit&id=' + $('#game_id').val(),
-            type: "post",
-            dataType: "json",
-        });
-};*/
+
                         
-function play(data)
+function play(data,time)
 {
-    console.log(data);
-    console.log(wariors);
-    $.each(data,function (){
-        for(i = 0; i < 6; i++)
-        {
-            if(this.user == wariors[i].id)
+    setTimeout(function(){
+        //console.log(data);
+            for(i = 0; i < 6; i++)
             {
-                if(this.action == 1){
-                      //  console.log(wariors[i]);
-                        if( i < 3)
+                if(data.user == wariors[i].id)
+                {
+                    if(data.action == 1) {
+                        if(data.result == 1)
                         {
-                            hit(2 + parseInt(this.direction));
+                            if( i < 3)
+                            {
+                                hit(2 + parseInt(data.direction),i);
+                            }else{
+                                hit(parseInt(data.direction) -1,i);
+                            }
                         }else{
-                            hit(parseInt(this.direction) -1);
+                            if( i < 3)
+                            {
+                                miss(2 + parseInt(data.direction),i);
+                            }else{
+                                miss(parseInt(data.direction) -1,i);
+                            }
                         }
+                    }
+                    if(data.action == 3){
+                        if( i > 2)
+                            {
+                                heal(2 + parseInt(data.direction));
+                            }else{
+                                heal(parseInt(data.direction)-1);
+                            }
+                    }
                 }
             }
-        }
-    });
+        },time*2500);
+        console.log('deley: ' + time);
+        return time+1;
 }
 
-function hit(place)
+function hit(place,i)
 {
-    wariors[place] -= 20;
-    $('#w' + (place +1) +'.hp').css('width','20px');
+   // console.log(place +' <= '+i);
+    var offset = $('#w'+(i+1)).offset();
+   // console.log(offset);
+   // console.log(offset);
+    $('#aim').css('left', offset.left + 50);
+    $('#aim').css('top', offset.top + 50);
+    $('#aim').show(800);
+    offset = $('#w'+(place+1)).offset();
+    //console.log(offset);
+    $('#aim').animate({left: offset.left + 100  , top: offset.top + 50 },500,function(){
+        wariors[place].hp -= 20;
+        if (wariors[place].hp < 0) wariors[place].hp = 0;
+        $('#w' + (place +1) +' .hp').animate({width: wariors[place].hp +'%'},'slow');
+    });
+   // console.log(place + '  place');
+    $('#aim').hide(800);
+}
+
+function heal(place)
+{
+    wariors[place].hp += 20;
+    if (wariors[place].hp > 100) wariors[place].hp = 100;
+    $('#w' + (place +1) +' .hp').css('background-color','green');
+    $('#w' + (place +1) +' .hp').animate({width: wariors[place].hp +'%'},'slow',function(){
+       $('#w' + (place +1) +' .hp').css('background-color','red'); 
+    });
+    
+}
+
+function miss(place,i)
+{
+    var offset = $('#w'+(i+1)).offset();
+    $('#aim').css('left', offset.left + 50);
+    $('#aim').css('top', offset.top + 50);
+    $('#aim').show(800);
+    offset = $('#w'+(place+1)).offset();
+    //console.log(offset);
+    $('#aim').animate({left: offset.left + 100  , top: offset.top + 50 },500,function(){
+        $('#miss').css('left', offset.left + 150);
+        $('#miss').css('top', offset.top + 70);
+        $('#miss').show(1000);
+        $('#miss').animate({top: '-=40'},'slow');
+        $('#miss').hide(1000);
+    });
+    $('#aim').hide(800);
 }

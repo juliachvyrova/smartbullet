@@ -205,7 +205,7 @@ class GameController extends Controller
                             if($aim != NULL)
                             {
                                 if($aim->action == 2) $dodje = 60;
-                                if(mt_rand(0, 99) > 40 + $dodje) $log->result = 1;
+                                if(mt_rand(0, 99)  > 40 + $dodje) $log->result = 1;
                                 else $log->result = 0;
                             }
                             else $log->result = 1;
@@ -250,7 +250,7 @@ class GameController extends Controller
                    'tern' => $tern,
               ));
              if(count($logs) == 6){
-                  $mylog = array();
+                 $mylog = array();
                 foreach ($logs as $log)
                 {
                     $mylog[$log->id]=array(
@@ -263,11 +263,12 @@ class GameController extends Controller
                 }
                 echo json_encode($mylog);
              }else{
+                 
                  echo json_encode(array('result' => $tern));
              }
              Yii::app()->end();
          }
-         
+
          public function actionGiveMap($id){
              $model = GameMap::model()->findByAttributes(array('game_id' => $id));
             /* while ($model->user_count != 3)

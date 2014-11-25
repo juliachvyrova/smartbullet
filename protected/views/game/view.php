@@ -9,11 +9,12 @@
 </div>
 <br><br><br>
 <div class="game_win">
+    <img src="images/aim.png" id="aim"><img src="images/miss.png" id="miss">
     <div id="field"></div>
     <div id="choise">
         <input type="submit" value="Attack" class="solut">
         <input type="submit" value="Dodge" class="solut">
-        <input type="submit" value="Special" class="solut">
+        <input type="submit" value="Heal" class="solut">
         <select id="direction">
             <option>Left</option>
             <option>Right</option>
@@ -153,8 +154,29 @@ array(
       width: 100%;
       height: 100%;
     }
+    .hp2{
+      border-radius: 0px 5px;
+      background-color:  #ff6666;  
+      width: 100%;
+      height: 100%;
+    }
     
     .user-login{
         color: scrollbar;
+    }
+    
+    #aim{
+        width: 50px;
+        position: absolute;
+        left: 100px;
+        top: 100px;
+       // opacity: 0;
+    }
+    #miss{
+        width: 100px;
+        position: absolute;
+        left: 100px;
+        top: 100px;
+       // opacity: 0;
     }
 </style>
