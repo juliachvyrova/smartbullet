@@ -11,7 +11,7 @@
                 <?php echo DataHelper::writeAt($data->datetime);/*$time=strtotime($data->datetime); echo date("d.m.Y в H:i",$time);*/?>
                 </p>
                 <div class="text-comm">
-                    <?php echo $data->text;?><br>
+                    <?php echo Smiles::codeToImg($data->text);?><br>
                 </div>
 
 
@@ -35,7 +35,7 @@
                         <?php echo DataHelper::writeAt($data->datetime);/*$time=strtotime($coment->datetime); echo date("d.m.Y в H:i",$time);*/?>
                         </p>
                         <div class="text-comm">
-                            <?php echo $coment->text;?><br>    
+                            <?php echo Smiles::codeToImg($coment->text);?><br>    
                         </div>              
                     </div>
                 <?php endforeach; ?>  
@@ -51,6 +51,11 @@
                    <div id="add-comment">
                         <textarea rows="10" cols="45" id="comm<?php echo $data->id; ?>" class="new-post"></textarea>
                         <input type="button" id="add-com" value="Добавить" data-post=<?php echo $data->id; ?> data-url1="<?php echo Yii::app()->createUrl("comment/add");?> " data-url2="<?php echo Yii::app()->createUrl("user/view",array("id"=>$data->wall_id));?>" />
+                        <div class="addSmile" data-id_list="postSmile<?php echo $data->id;?>" >
+                            <div class="smileList" id="postSmile<?php echo $data->id;?>">
+                                <?php echo Smiles::show("#comm".$data->id);?>
+                            </div>
+                        </div>
                    </div>
 
 

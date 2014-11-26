@@ -152,6 +152,19 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public static function Top()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+                $dataProvider=new CActiveDataProvider('User', array(
+
+                            'criteria'=>array(
+                                    'order'=>'rating DESC',
+                                'limit'=>'10',
+                            ),
+                                ));
+                return $dataProvider;
+	}
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -264,5 +277,8 @@ class User extends CActiveRecord
     	{$this->addError('password2','Неверный пароль!'); return false;}
     return true;
     }
+    
+    
+
 
 }

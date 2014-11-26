@@ -11,7 +11,7 @@
 	<?php endif;?>
 
 
-			<?php echo "<a href=/smartbullet/index.php?r=user/view&id=".$data->id.">".$data->login."</a>";?>
+			<?php echo "<a href=".Yii::app()->createUrl("user/view",array('id'=>$data->id)).">".$data->login."</a>";?>
 
 
 
@@ -48,6 +48,7 @@
           
         </div> 
 <input type="button" onclick="location.href='<?php echo Yii::app()->createUrl("message/newMessage",array("user"=>$data->id));?>'" value="Написать сообщение">
+<input type="button" id="inviteGame" data-url1="<?php echo Yii::app()->createUrl("invite/newGame");?>" data-url2="<?php echo Yii::app()->createUrl("game");?>" data-id1="<?php echo $data->id;?>" value="Пригласить в игру">
   <?php endif; ?> 
 
 

@@ -14,7 +14,7 @@
     <?php $time=strtotime($data->datetime); echo date("d.m.Y в H:i",$time);?>
     </p>
     <div class="text-comm">
-        <?php if (strlen($data->text)<=25) echo $data->text; else echo mb_substr($data->text,0,26)." ...";?>   
+        <?php if (strlen($data->text)<=25) echo Smiles::codeToImg($data->text); else echo mb_substr($data->text,0,26)." ...";?>   
     </div>     <br> 
 </div>
 
