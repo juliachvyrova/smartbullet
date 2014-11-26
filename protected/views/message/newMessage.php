@@ -6,5 +6,10 @@
    	<div id="add-comment">
         <textarea rows="10" cols="45" id="text" class="new-post"></textarea>
         <input type="button" id="add-message" value="Написать" data-url1="<?php echo Yii::app()->createUrl("message/add");?>" data-id="<?php echo $user->id;?>"/>
+        <div class="addSmile" data-id_list="newMessage" >
+            <div class="smileList" id="newMessage">
+                <?php echo Smiles::show("#text");?>
+            </div>
+        </div>
    </div>
 </div>

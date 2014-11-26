@@ -22,11 +22,14 @@
                 <li><a href="<?php echo Yii::app()->createUrl("/message/to");?>">Сообщения<?php $c=Message::countNew(Yii::app()->user->GetId()); if($c>0) echo "<span class='newNews'>+".$c."</span>";?>
                 </a></li>
 
-                <li><a href="">Приглашения в игру</a></li>
+                <li><a href="<?php echo Yii::app()->createUrl("/invite");?>">Приглашения в игру<?php $c=Invite::newInvite(Yii::app()->user->GetId()); if($c>0) echo "<span class='newNews'>+".$c."</span>";?>
+                    </a></li>
 
                 <li><a href="<?php echo Yii::app()->createUrl("/user/friends");?>">Друзья <?php $c=Relationship::newRequests(Yii::app()->user->GetId()); if($c>0) echo "<span class='newNews'>+".$c."</span>";?></a></li>
                 
                 <li><a href="<?php echo Yii::app()->createUrl("/user/update");?>">Редактировать профиль</a></li>
+                
+                <li><a href="<?php echo Yii::app()->createUrl("/user/top");?>">Лучшие игроки</a></li>
 
                 <li><a href="<?php echo Yii::app()->createUrl("/user");?>">Поиск</a></li>
                 

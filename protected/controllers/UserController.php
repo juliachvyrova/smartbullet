@@ -32,11 +32,11 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','create','update','view','friends','serch','requests','myRequests','find','changePass'/*,'messageTo'*/),
+				'actions'=>array('top','index','create','update','view','friends','serch','requests','myRequests','find','changePass','admin'/*,'messageTo'*/),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('top','admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -362,13 +362,17 @@ $dataProvider=new CActiveDataProvider('User', array(
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	public function actionTop()
 	{
-		$model=new User('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
+		//$model=new User('top');
+                $model=User::Top();
+                
+                
+                
+		//$model->unsetAttributes();  // clear any default values
+	/*	if(isset($_GET['User']))
 			$model->attributes=$_GET['User'];
-
+*/
 		$this->render('admin',array(
 			'model'=>$model,
 		));

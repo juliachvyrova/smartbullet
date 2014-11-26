@@ -92,6 +92,9 @@ class GameController extends Controller
                     'model'=>$this->loadModel($id),
             ));
 	}
+           $this->render('view',array( 
+                    'model'=>$this->loadModel($id),
+            ));
     }
 	public function actionChatPolling($id){
             

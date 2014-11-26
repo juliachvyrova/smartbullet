@@ -1,5 +1,11 @@
 var position1='down';
 var position2='up';
+var showSmile='no';
+
+function writeSmile(cod,textId){
+    $(textId).val($(textId).val()+" "+cod+" ");
+    $(textId).focus();   
+}
 
     
 $(document).ready(function()
@@ -277,5 +283,66 @@ $(document).ready(function()
     $(document.body).on("click",'a',function(event){
         setTimeout('$("#left-menu").height($("#content").height())', 500);
     })
+    
+    $(document.body).on("click",'.addSmile',function(event){
+        var idList="#"+$(this).data("id_list");
+        if (showSmile=="no") {
+            $(idList).css('display',' block');
+            showSmile="yes";
+        } else {
+            $(idList).css('display',' none');
+            showSmile="no";
+        }
+    })
+    
+    
+    
+    
+    //удаление комментария
+    $(document.body).on("click",".delInvite",function(event)
+    {
+        var id=$(this).data("id1");
+        var url=$(this).data("url1");
+        /*var url2=$(this).data("url2");
+        var com=$(this).data("com");*/
+
+        $.ajax({
+            url:  url,
+            type: "POST",
+            data: "id="+id,
+            success: function(content) {     
+                $("#invite"+id).html(content);
+                return;
+            }
+        });
+        setTimeout('$("#left-menu").height($("#content").height())', 500);
+    });
+    
+    
+    
+     //удаление комментария
+    $(document.body).on("click","#inviteGame",function(event)
+    {
+        var id=$(this).data("id1");
+        var url=$(this).data("url1");
+        var url2=$(this).data("url2");/*
+        var com=$(this).data("com");
+*/
+        $.ajax({
+            url:  url,
+            type: "POST",
+            data: "id="+id,
+            success: function(content) {     
+               /* $("#invite"+id).html(content);
+                return;*/
+                //setTimeout(function (){},10000);
+                //alert(url2+"/"+content);
+                location.href=url2+"/"+content;
+               // alert(content);
+            }
+        });
+    });
+    
+    
 
 });

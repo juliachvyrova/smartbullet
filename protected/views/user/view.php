@@ -12,6 +12,7 @@
                     <input type="button" class="addFriend" data-userid="<?php echo $model->id;?>" data-url1="<?php echo Yii::app()->createUrl("relationship/add");?>" data-url2=<?php echo Yii::app()->createUrl("user/view",array("id"=>$model->id));?> value="Добавить в друзья"></input>
                 <?php endif;?>
                     <br><input type="button" onclick="location.href='<?php echo Yii::app()->createUrl("message/newMessage",array("user"=>$model->id));?>'" value="Написать сообщение">
+                    <br><input type="button" id="inviteGame" data-url1="<?php echo Yii::app()->createUrl("invite/newGame");?>" data-url2="<?php echo Yii::app()->createUrl("game");?>" data-id1="<?php echo $model->id;?>" value="Пригласить в игру">
             <?php endif; ?> 
         </div> 
         <div id="login">
@@ -56,8 +57,14 @@
     <div id="user-wall">
         <strong>Добавить запись</strong><br>
         <textarea rows="10" cols="45" class="new-post" id="n-post"></textarea>
+
         <input type="button" id="add-post" value="Добавить" data-wall=<?php echo $model->id; ?> data-url1="<?php echo Yii::app()->createUrl("post/add");?>" data-url2="<?php echo Yii::app()->createUrl("user/view",array("id"=>$model->id));?>" />
-        <div id='wall'>
+          <div class="addSmile" data-id_list="mainPost" >
+            <div class="smileList" id="mainPost">
+                <?php echo Smiles::show("#n-post");?>
+            </div>
+          </div>
+          <div id='wall'>
             <?php 
                 if ($model->countPost>0) {
                     $this->widget('zii.widgets.CListView', array(
