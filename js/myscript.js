@@ -9,6 +9,7 @@ $(document).ready(function(){
     });
 
     giveMap();
+
     /*for(i = 0; i < 6; i++)
     {
         $wariors[i]= new Warior();
@@ -31,6 +32,7 @@ $(document).ready(function(){
     });
     
     $('#send').on('click',function(){
+       // $(this).data('url')
         send();
         $('#msg').val('');
         $('#output').animate({'scrollTop': 999999});
@@ -62,9 +64,27 @@ function giveMap()
                     $.each( $('.solut') , function(){
                         this.disabled = false;
                     });
+                    giveStats();
                     //console.log(data);
                     startTimer();
                 }
+            }     
+        });
+}
+
+function giveStats()
+{
+    $.ajax({
+            url: 'index.php?r=game/giveStats&id=' +  $('#game_id').val(),
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                for(i = 1; i < 7 ; i++)
+                {
+                    wariors[i-1].hp= data[i];
+                    $('#w' + i +' .hp').animate({width: wariors[i-1].hp +'%'},'slow');
+                }
+                console.log(wariors);
             }     
         });
 }
@@ -117,7 +137,7 @@ function send(){
                 $('#output').html('');
                 $.each(data,function(){
                     $('#output').append('<span class="user_name">'+ this.user +
-                            '</span>:' + this.text + '<br>');
+                            '</span>:' + escapeHtml(this.text) + '<br>');
                 });    
         }
     });
@@ -135,7 +155,7 @@ function chatPolling(){
              $('#output').html('');
                 $.each(data,function(){
                     $('#output').append('<span class="user_name">'+ this.user +
-                            '</span>:' + this.text + '<br>');
+                            '</span>:' + escapeHtml(this.text) + '<br>');
                 });
             }
         });
@@ -158,9 +178,12 @@ function gamePolling(){
                         },1000);
                     });
                     console.log(data);
+                    $.each( $('.solut') , function(){
+                        this.disabled = false;
+                    });
                     $('#choise').slideDown(1000);
                     $("#my_timer").html(MaxTime);
-                    setTimeout(startTimer, 1000);
+                    setTimeout(startTimer, 6000);
                 }
             }
         });
@@ -197,7 +220,11 @@ function startTimer() {
         if(flag == true)
             flag = false;
         else {
-            // user_choise(0);
+           /* $.each( $('.solut') , function(){
+                this.disabled = true;
+            });
+            $('#choise').slideToggle(1500);
+            user_choise(0);*/
         }
         return;
     }
@@ -220,70 +247,74 @@ function play(data,time)
         //console.log(data);
             for(i = 0; i < 6; i++)
             {
-                if(data.user == wariors[i].id)
-                {
-                    if(data.action == 1) {
-                        if(data.result == 1)
-                        {
-                            if( i < 3)
+                if(wariors[i].dead == false){
+                    if(data.user == wariors[i].id)
+                    {
+                        if(data.action == 1) {
+                            if(data.result == 1)
                             {
-                                hit(2 + parseInt(data.direction),i);
+                                if( i < 3)
+                                {
+                                    hit(2 + parseInt(data.direction),i);
+                                }else{
+                                    hit(parseInt(data.direction) -1,i);
+                                }
                             }else{
-                                hit(parseInt(data.direction) -1,i);
-                            }
-                        }else{
-                            if( i < 3)
-                            {
-                                miss(2 + parseInt(data.direction),i);
-                            }else{
-                                miss(parseInt(data.direction) -1,i);
+                                if( i < 3)
+                                {
+                                    miss(2 + parseInt(data.direction),i);
+                                }else{
+                                    miss(parseInt(data.direction) -1,i);
+                                }
                             }
                         }
-                    }
-                    if(data.action == 3){
-                        if( i > 2)
-                            {
-                                heal(2 + parseInt(data.direction));
-                            }else{
-                                heal(parseInt(data.direction)-1);
-                            }
+                        if(data.action == 3){
+                            if( i > 2)
+                                {
+                                    heal(2 + parseInt(data.direction));
+                                }else{
+                                    heal(parseInt(data.direction)-1);
+                                }
+                        }
                     }
                 }
             }
         },time*2500);
-        console.log('deley: ' + time);
+        //console.log(wariors);
         return time+1;
 }
 
 function hit(place,i)
 {
-   // console.log(place +' <= '+i);
+    wariors[place].hp -= 20;
+    if (wariors[place].hp < 1)
+    {
+        wariors[place].hp = 0;
+        wariors[place].death = true;
+    }
+    God();
     var offset = $('#w'+(i+1)).offset();
-   // console.log(offset);
-   // console.log(offset);
     $('#aim').css('left', offset.left + 50);
     $('#aim').css('top', offset.top + 50);
     $('#aim').show(800);
     offset = $('#w'+(place+1)).offset();
-    //console.log(offset);
-    $('#aim').animate({left: offset.left + 100  , top: offset.top + 50 },500,function(){
-        wariors[place].hp -= 20;
-        if (wariors[place].hp < 0) wariors[place].hp = 0;
+    $('#aim').animate({left: offset.left + 100  , top: offset.top + 50 },500,function(){   
         $('#w' + (place +1) +' .hp').animate({width: wariors[place].hp +'%'},'slow');
     });
-   // console.log(place + '  place');
     $('#aim').hide(500);
 }
 
 function heal(place)
 {
-    wariors[place].hp += 20;
-    if (wariors[place].hp > 100) wariors[place].hp = 100;
-    $('#w' + (place +1) +' .hp').css('background-color','green');
-    $('#w' + (place +1) +' .hp').animate({width: wariors[place].hp +'%'},'slow',function(){
-       $('#w' + (place +1) +' .hp').css('background-color','red'); 
-    });
-    
+    if (wariors[place].dead == false)
+    {
+        wariors[place].hp += 15;
+        if (wariors[place].hp > 100) wariors[place].hp = 100;
+        $('#w' + (place +1) +' .hp').css('background-color','green');
+        $('#w' + (place +1) +' .hp').animate({width: wariors[place].hp +'%'},'slow',function(){
+           $('#w' + (place +1) +' .hp').css('background-color','red'); 
+        });
+    }  
 }
 
 function miss(place,i)
@@ -302,4 +333,52 @@ function miss(place,i)
         $('#miss').hide(500);
     });
     $('#aim').hide(800);
+}
+
+function escapeHtml(text) {
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+function God()
+{
+    for(i = 0; i < 6; i++)
+    {
+        if (wariors[i].hp == 0 && wariors[i].dead == false)
+        {   
+            wariors[i].dead = true;
+            $('#w'+(i+1)+' .war-img').hide();
+            $('#w'+(i+1)+' .war-img').css('background' ,'url("images/rip.png") no-repeat center');
+            $('#w'+(i+1)+' .war-img').css('background-size' ,'contain');
+            $('#w'+(i+1)+' .war-img').show(500);
+        }
+            
+    }
+    if(wariors[0].dead == true && wariors[1].dead == true && wariors[2].dead == true)
+    {
+        alert('team2 win');
+        endGame();
+    }
+    if(wariors[3].dead == true && wariors[4].dead == true && wariors[5].dead == true)
+    {
+        alert('team1 win');
+        endGame();
+    }
+    
+}
+
+function endGame()
+{
+    $.ajax({
+        url: 'index.php?r=game/endGame&id=' + $('#game_id').val(),
+        type: "post",
+        dataType: "json"
+    });
 }

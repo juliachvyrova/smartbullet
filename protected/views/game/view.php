@@ -4,7 +4,7 @@
     $cs->registerScriptFile($baseUrl.'/js/myscript.js');
 ?>
 <div id="myhead">
-<div id="my_timer">10</div>
+
 </div>
 <br><br><br>
 <div class="game_win">
@@ -19,7 +19,7 @@
             <option>Right</option>
             <option>Back</option>
         </select>
-        
+        <div id="my_timer">60</div>
     </div>
 </div>
 <div id='rol'>
@@ -30,7 +30,7 @@ foreach ($model->chatmsg as $chat){
     $str='';
    if($chat->author <> NULL){
         $str .= '<span class="user_name">'.$chat->author->login.'</span>: ';
-        $str .= $chat->text.'<br>';
+        $str .= htmlspecialchars($chat->text).'<br>';
    }
    echo $str;
 }
@@ -84,7 +84,6 @@ array(
         height: 100%;
         width: 30%;
         float: right;
-        background-color: yellow;
     }
     
     input[type='text']{

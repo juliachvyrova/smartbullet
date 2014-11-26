@@ -23,7 +23,7 @@ class GameController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','chatPolling','fight','tern','gamePolling','giveMap'),
+				'actions'=>array('index','view','chatPolling','fight','tern','gamePolling','giveMap','giveStats','endGame'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -52,6 +52,10 @@ class GameController extends Controller
                 $mod->user_count = 1;
                 $mod->user1 = Yii::app()->user->getId();
                 $mod->save();
+                $this->render('view',array( 
+                    'model'=>$this->loadModel($id),
+                ));
+                Yii::app()->end();
             }else{
                 if($exists->user_count  < 6 )
                 {
@@ -195,7 +199,6 @@ class GameController extends Controller
                             $log->result = 0;                        
                             break;
                         case 1: 
-                            $dir = $log->direction;
                             $map = GameMap::model()->findByAttributes(array('game_id' => $id));
                             for($i=1; $i <= 6; $i++)
                             {
@@ -275,9 +278,9 @@ class GameController extends Controller
                 $timer->time = time();
                 $timer->save();
              }else{
-                 if($timer->time + 30 < time())
+                 if($timer->time + 80 < time())
                  {
-
+                    $this->makeResult($id,$tern);
                     for($i = 1; $i < 7; $i++)
                     {
                         $exist = LogGame::model()->findByAttributes(array(
@@ -295,7 +298,7 @@ class GameController extends Controller
                             $exist->save();
                         }
                     }
-                    $this->makeResult($id,$tern);
+                    
                      $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id,
                             'tern' => $tern,
                       ));
@@ -351,5 +354,90 @@ class GameController extends Controller
                 $log->save();
             }
         }
-         
+        
+        public function actionGiveStats($id)
+        {
+            $wariors = array();
+            for($i = 0; $i < 6; $i++)
+                $wariors[$i] = 100;
+            $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id)); 
+            $terns = count($logs) / 6;
+            for($i = 1; $i <= $terns; $i++)
+            {
+                $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id,
+                    'tern' => $i));
+                foreach ($logs as $log)
+                {
+                    $map = GameMap::model()->findByAttributes(array('game_id' => $id));
+                    for($j=1; $j <= 6; $j++)
+                        {
+                            if($map['user'.$j] == $log->user_id)
+                                    if($j < 4)
+                                        $team = 1;
+                                    else 
+                                        $team = 0;
+                        }
+                        
+                    if($log->action == 1 && $log->result == 1)
+                    {
+                        $place = $team * 3 + $log->direction - 1;
+                        if($wariors[$place] > 20) $wariors[$place] -= 20;
+                        else $wariors[$place] = 0;
+                    }
+                    if($log->action == 3)
+                    {
+                        $place = $team * 3 + $log->direction -1;
+                        if($wariors[$place] < 75)$wariors[$place] += 15;
+                        else $wariors[$place] = 100;
+                    }
+                }
+            }
+            $result = array(
+                1 => $wariors[0],
+                2 => $wariors[1],
+                3 => $wariors[2],
+                4 => $wariors[3],
+                5 => $wariors[4],
+                6 => $wariors[5],
+            );
+            echo json_encode($result);
+        }  
+        
+        public function actionEndGame($id)
+        {
+            $result = $this->actionGiveStats($id);
+            $map = GameMap::model()->findByAttributes(array('game_id' => $id));
+            if($result[1] == 0 && $result[2] == 0 && $result[3] == 0)
+            {
+                for($i = 1; $i < 4; $i++){
+                    $user = User::model()->findByPk($map['user'.$i]);
+                    $user->raiting += 20;
+                    $user->save();
+                }
+                for($i = 4; $i < 7; $i++){
+                    $user = User::model()->findByPk($map['user'.$i]);
+                    $user->raiting -= 20;
+                    $user->save();
+                }
+                $game = Game::model()->findByPk($id);
+                $game->game_status = 2;
+                $game->save();
+            }
+            if($result[4] == 0 && $result[5] == 0 && $result[6] == 0)
+            {
+                for($i = 4; $i < 7; $i++){
+                    $user = User::model()->findByPk($map['user'.$i]);
+                    $user->rating += 20;
+                    $user->save();
+                }
+                for($i = 1; $i < 4; $i++){
+                    $user = User::model()->findByPk($map['user'.$i]);
+                    $user->rating -= 20;
+                    $user->save();
+                }
+                $game = Game::model()->findByPk($id);
+                $game->game_status = 2;
+                $game->save();
+            }
+        }
 }
