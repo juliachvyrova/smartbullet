@@ -48,6 +48,7 @@ class GameController extends Controller
             if($exists == NULL){// if map for this game are not exist, make it
                 $mod = new GameMap;
                 $mod->game_id = $id;
+                $mod->time = NULL;
                 $mod->user_count = 1;
                 $mod->user1 = Yii::app()->user->getId();
                 $mod->save();
@@ -63,17 +64,24 @@ class GameController extends Controller
                     if ($flag == true)//if we are not in game already
                     {
                         $exists['user'.(++$exists->user_count)] = Yii::app()->user->getId();//add as in game
+                        if($exists->user_count == 6)
+                        {
+                            $exists->time = time();
+                        }
                         $exists->save();
                     }
                 }else{//game is full
                     
                     if($exists->user_count == 6)
                     {
-                        $this->render('view',array( 
-                                'model'=>$this->loadModel($id),
-                        ));
-                        Yii::app()->end();
-                    }
+                        for($i = 1; $i < 6 ; $i++)
+                        {
+                            if($exists['user'.$i] = Yii::app()->user->getId())
+                            $this->render('view',array( 
+                                    'model'=>$this->loadModel($id),
+                            ));
+                            Yii::app()->end();
+                        }
                     $this->render('deny',array( 
                       'model'=>$this->loadModel($id),
                        ));
@@ -84,7 +92,7 @@ class GameController extends Controller
                     'model'=>$this->loadModel($id),
             ));
 	}
-
+    }
 	public function actionChatPolling($id){
             
                $textMsg = $_POST['msg'];
@@ -207,8 +215,10 @@ class GameController extends Controller
                                 if($aim->action == 2) $dodje = 60;
                                 if(mt_rand(0, 99)  > 40 + $dodje) $log->result = 1;
                                 else $log->result = 0;
+                                if ($aim->action == 0) $log->result = 1;
                             }
                             else $log->result = 1;
+
                             break;
                         case 2:
                             $log->result = 1;
@@ -221,8 +231,8 @@ class GameController extends Controller
                 }   
             }            
         }
+        
         public function actionTern($id){
-            //findAllByAttributes
             $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id,
                    'user_id' => (Yii::app()->user->getId()),
                 ));
@@ -236,7 +246,6 @@ class GameController extends Controller
                     'direction' => $log->direction  
                 );
             }
-           // echo var_dump($logs);
             echo json_encode($mylog);
             Yii::app()->end();
         }
@@ -249,6 +258,7 @@ class GameController extends Controller
              $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id,
                    'tern' => $tern,
               ));
+             $timer = GameMap::model()->findByAttributes(array('game_id' => $id));
              if(count($logs) == 6){
                  $mylog = array();
                 foreach ($logs as $log)
@@ -262,20 +272,56 @@ class GameController extends Controller
                     );
                 }
                 echo json_encode($mylog);
+                $timer->time = time();
+                $timer->save();
              }else{
-                 
-                 echo json_encode(array('result' => $tern));
+                 if($timer->time + 30 < time())
+                 {
+
+                    for($i = 1; $i < 7; $i++)
+                    {
+                        $exist = LogGame::model()->findByAttributes(array(
+                            'game_id' => $id,
+                            'tern' => $tern,
+                            'user_id' => $timer['user'.$i]
+                            ));
+                        if($exist == NULL)
+                        {
+                            $exist = new LogGame();
+                            $exist->action = 0;
+                            $exist->game_id = $id;
+                            $exist->user_id = $timer['user'.$i];
+                            $exist->tern = $tern;
+                            $exist->save();
+                        }
+                    }
+                    $this->makeResult($id,$tern);
+                     $logs = LogGame::model()->findAllByAttributes(array('game_id' => $id,
+                            'tern' => $tern,
+                      ));
+                    $mylog = array();
+                      foreach ($logs as $log)
+                      {
+                          $mylog[$log->id]=array(
+                              'user' => $log->user_id,
+                              'tern' => $log->tern . ' loolll',
+                              'action' => $log->action,
+                              'direction' => $log->direction,
+                              'result' => $log->result
+                          );
+                      }
+                      $timer->time = time();
+                      $timer->save();
+                      echo json_encode($mylog);
+                      Yii::app()->end();
+                 }
+                echo json_encode(array('result' => $tern)); 
              }
              Yii::app()->end();
          }
 
          public function actionGiveMap($id){
              $model = GameMap::model()->findByAttributes(array('game_id' => $id));
-            /* while ($model->user_count != 3)
-             {
-                 sleep(1);
-                 $model = GameMap::model()->findByAttributes(array('game_id' => $id));
-             }*/
              if ($model->user_count == 6)
              echo json_encode(array(
                  '1' => $model->user1,

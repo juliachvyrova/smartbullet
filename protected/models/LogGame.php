@@ -33,7 +33,7 @@ class LogGame extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('game_id, user_id, action, direction, result, tern', 'numerical', 'integerOnly'=>true),
+			array('game_id, user_id, action, direction, result, tern', 'numerical' ,'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, game_id, user_id, action, direction, result', 'safe', 'on'=>'search'),
@@ -65,7 +65,7 @@ class LogGame extends CActiveRecord
 			'action' => 'Action',
 			'direction' => 'Direction',
 			'result' => 'Result',
-                        'tern' => 'Tern'
+                        'tern' => 'Tern',
 		);
 	}
 

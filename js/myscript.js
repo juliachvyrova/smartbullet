@@ -42,6 +42,7 @@ function giveMap()
     $('#field').html('<h1>waiting for players...</h1>');
     $.ajax({
             url: 'index.php?r=game/giveMap&id=' +  $('#game_id').val(),
+            //url: '/game/giveMap/' +  $('#game_id').val(),
             type: "post",
             dataType: "json",
             success: function(data){
@@ -121,6 +122,7 @@ function send(){
         }
     });
 }
+
 function chatPolling(){
     $.ajax({
             url: 'index.php?r=game/chatPolling&id=' + $('#game_id').val(),
@@ -155,6 +157,7 @@ function gamePolling(){
                            i = play(self,i);
                         },1000);
                     });
+                    console.log(data);
                     $('#choise').slideDown(1000);
                     $("#my_timer").html(MaxTime);
                     setTimeout(startTimer, 1000);
@@ -269,7 +272,7 @@ function hit(place,i)
         $('#w' + (place +1) +' .hp').animate({width: wariors[place].hp +'%'},'slow');
     });
    // console.log(place + '  place');
-    $('#aim').hide(800);
+    $('#aim').hide(500);
 }
 
 function heal(place)
@@ -295,8 +298,8 @@ function miss(place,i)
         $('#miss').css('left', offset.left + 150);
         $('#miss').css('top', offset.top + 70);
         $('#miss').show(1000);
-        $('#miss').animate({top: '-=40'},'slow');
-        $('#miss').hide(1000);
+        $('#miss').animate({top: '-=40'});
+        $('#miss').hide(500);
     });
     $('#aim').hide(800);
 }

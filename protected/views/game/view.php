@@ -4,7 +4,6 @@
     $cs->registerScriptFile($baseUrl.'/js/myscript.js');
 ?>
 <div id="myhead">
-<div id="smart"><h1>SmartBullet</h1></div>
 <div id="my_timer">10</div>
 </div>
 <br><br><br>
@@ -61,6 +60,7 @@ array(
     }
     
     .chat_win{
+        margin-top: 10px;
         border: 2px solid silver;
         border-radius: 5px; 
         height: 100px;

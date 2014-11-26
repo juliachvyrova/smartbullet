@@ -32,10 +32,10 @@ class GameMap extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('game_id, user_count, user1, user2, user3, user4, user5, user6', 'numerical', 'integerOnly'=>true),
+			array('game_id, user_count, user1, user2, user3, user4, user5, user6, time', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, game_id, user_count, user1, user2, user3, user4, user5, user6', 'safe', 'on'=>'search'),
+			array('id, game_id, user_count, user1, user2, user3, user4, user5, user6, time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,6 +72,7 @@ class GameMap extends CActiveRecord
 			'user4' => 'User4',
 			'user5' => 'User5',
 			'user6' => 'User6',
+                        'time' => 'Time'
 		);
 	}
 
@@ -102,7 +103,7 @@ class GameMap extends CActiveRecord
 		$criteria->compare('user4',$this->user4);
 		$criteria->compare('user5',$this->user5);
 		$criteria->compare('user6',$this->user6);
-
+                $criteria->compare('time',$this->time);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
