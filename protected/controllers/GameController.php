@@ -95,10 +95,12 @@ class GameController extends Controller
             $this->render('view',array( 
                     'model'=>$this->loadModel($id),
             ));
+            Yii::app()->end();
 	}
            $this->render('view',array( 
                     'model'=>$this->loadModel($id),
             ));
+           Yii::app()->end();
     }
 	public function actionChatPolling($id){
             
@@ -414,12 +416,12 @@ class GameController extends Controller
             {
                 for($i = 1; $i < 4; $i++){
                     $user = User::model()->findByPk($map['user'.$i]);
-                    $user->raiting += 20;
+                    $user->rating += 20;
                     $user->save();
                 }
                 for($i = 4; $i < 7; $i++){
                     $user = User::model()->findByPk($map['user'.$i]);
-                    $user->raiting -= 20;
+                    $user->rating -= 20;
                     $user->save();
                 }
                 $game = Game::model()->findByPk($id);
