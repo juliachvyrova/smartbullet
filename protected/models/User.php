@@ -44,7 +44,7 @@ class User extends CActiveRecord {
             array('login, city, email, first_name, last_name', 'length', 'max' => 32),
             array('password, password2, password3', 'length', 'max' => 40),
             array('password, password2, password3', 'length', 'min' => 3),
-            array('login', 'length', 'min' => 5),
+            array('login', 'length', 'min' => 4),
             array('login', 'match', 'pattern' => '/^[A-z][\w]+$/'),
             array('login', 'unique'),
             array('password', 'compare', 'compareAttribute' => 'password2', 'on' => 'registration'),
