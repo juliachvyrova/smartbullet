@@ -127,10 +127,21 @@ class GameController extends Controller
 
         public function actionIndex()
 	{
-            $dataProvider=new CActiveDataProvider('Game');
-                $this->render('index',array(
-                        'dataProvider'=>$dataProvider,
-                ));
+            
+             $dataProvider = new CActiveDataProvider('Game', array(
+            'pagination' => array('pageSize' => 10),
+            'criteria' => array(
+                'order' => 'game_status ASC',
+            ),
+        ));
+            
+
+
+            
+            $this->render('index',array(
+                    'dataProvider'=>$dataProvider,
+                    'order' => 'game_status DESC',
+            ));
             
 	}
 

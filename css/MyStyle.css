@@ -1,3 +1,4 @@
+
 .error2
 {
     text-align: center
@@ -659,3 +660,12 @@ nav {
     font-weight: bold; 
     text-decoration: none;
 }
+
+
+.g0{ background: #fff;}
+.g1{ background: rgba(255,92,92,0.1);}
+.g2{ background: rgba(255,92,92,0.3);}
+.g3{ background: rgba(255,92,92,0.5);}
+.g4{ background: rgba(255,92,92,0.7);}
+.g5{ background: rgba(255,92,92,0.9);}
+.g6{ background: rgba(255,92,92,1);}

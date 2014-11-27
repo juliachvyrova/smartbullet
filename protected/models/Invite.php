@@ -110,7 +110,7 @@ class Invite extends CActiveRecord {
         $model = Invite::model()->findAll($crit); //return false;
         $count = Invite::model()->count($crit); //return false;
         foreach ($model as $invite) {
-            if ($invite->games->game_status == 1) {
+            if ($invite->games->game_status !=0) {
                 $count--;
             }
         }
