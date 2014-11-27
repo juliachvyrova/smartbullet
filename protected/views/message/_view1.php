@@ -12,7 +12,7 @@
     </p>
     <div class="text-comm">
        <?php
-            if (strlen($data->text) <= 25) {
+            if (strlen($data->text) <= 26) {
                 $text = CHtml::encode($data->text);
                 echo Smiles::codeToImg($text);
             } else {
