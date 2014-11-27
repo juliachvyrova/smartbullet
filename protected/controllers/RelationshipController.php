@@ -27,18 +27,15 @@ class RelationshipController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','del'),
+			/*array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
-			),
+			),*/
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','stopFolow','add','seeFolow'),
+				'actions'=>array('create','update','stopFolow','add','seeFolow','del'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
+
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -128,12 +125,8 @@ class RelationshipController extends Controller
         $crit->params=array(
             ':u'=>$u1,
         );
-        
-        //$count=  Relationship::model()->count($crit);
-        //echo ($count);
             
         $model=  Relationship::model()->find($crit);
-		//$dataProvider=new CActiveDataProvider('Relationship');
                
 		$this->render('index',array(
 			'$model'=>$model,
@@ -182,16 +175,9 @@ class RelationshipController extends Controller
 			Yii::app()->end();
 		}
 	}
-
- 	/*public function actionLook()
-    {
-
-    }*/
-
         
         public function actionAdd()
         {
-            //echo "Julia!";
             if (isset($_POST["newFriend"]))
             {   
                 
@@ -205,7 +191,6 @@ class RelationshipController extends Controller
                 );
                 
                 $count=  Relationship::model()->count($crit);
-                //echo ($count);
                if ($count>0)
                 {
                     $crit=new CDbCriteria;
@@ -235,8 +220,6 @@ class RelationshipController extends Controller
                     if($model->validate()){
                         $model->save();
                     }
-
-                    echo 'New friend!';
                    
                 } 
                 
@@ -258,10 +241,7 @@ class RelationshipController extends Controller
                     if($model->validate()){
                         $model->save();
                     }
-                    
-                    echo 'folower';
                 }
-               // echo "Julia!";
                 Yii::app()->end();
             }
         }
@@ -269,8 +249,7 @@ class RelationshipController extends Controller
 
         public function actionStopFolow()
         {
-        	echo "stop!";
-        	if (isset($_POST["friend"]))
+            if (isset($_POST["friend"]))
             {   
                 
                 $u1=Yii::app()->user->getId();
@@ -295,31 +274,6 @@ class RelationshipController extends Controller
                     
                     $model=  Relationship::model()->find($crit);
                     $model->delete();
-
-                    echo 'You stop folow!';
-                   
-                /*} 
-                
-                else{
-                    $model=new Relationship;
-                    $model->user1=$u1;
-                    $model->user2=$u2;
-                    $model->type=1;
-                    if($model->validate()){
-                        $model->save();
-                    }
-                    
-                    $model=new Relationship;
-                    $model->user1=$u2;
-                    $model->user2=$u1;
-                    $model->type=2;
-                    if($model->validate()){
-                        $model->save();
-                    }
-                    
-                    echo 'folower';
-                }*/
-               // echo "Julia!";
                 Yii::app()->end();
             }
         }
@@ -372,8 +326,7 @@ class RelationshipController extends Controller
 
         public function actionDel()
         {
-        	//echo "Del!";
-        	if (isset($_POST["friend"]))
+            if (isset($_POST["friend"]))
             {   
                             echo "Del2!";
                 $u1=Yii::app()->user->getId();
@@ -384,38 +337,25 @@ class RelationshipController extends Controller
                     ':u'=>$u1,
                     ':f'=>$u2,
                 );
-                
-               /* $count=  Relationship::model()->count($crit);
-                //echo ($count);
-               if ($count>0)
-                {
-                    $crit=new CDbCriteria;
-                    $crit->condition='user1=:u AND user2=:f';
-                    $crit->params=array(
-                        ':u'=>$u1,
-                        ':f'=>$u2,
-                    );*/
-                    
-                    $model=  Relationship::model()->find($crit);
-                    $model->type=2;
-                    if($model->validate()){
-                        $model->save();
-                    }
-                    
-                    $crit=new CDbCriteria;
-                    $crit->condition='user1=:f AND user2=:u AND type=0';
-                    $crit->params=array(
-                        ':u'=>$u1,
-                        ':f'=>$u2,
-                    );
-                    
-                    $model=  Relationship::model()->find($crit);
-                    $model->type=1;
-                    if($model->validate()){
-                        $model->save();
-                    }
+                 
+                $model=  Relationship::model()->find($crit);
+                $model->type=2;
+                if($model->validate()){
+                    $model->save();
+                }
 
-                    echo 'You stop folow!';
+                $crit=new CDbCriteria;
+                $crit->condition='user1=:f AND user2=:u AND type=0';
+                $crit->params=array(
+                    ':u'=>$u1,
+                    ':f'=>$u2,
+                );
+
+                $model=  Relationship::model()->find($crit);
+                $model->type=1;
+                if($model->validate()){
+                    $model->save();
+                }
                    
                 Yii::app()->end();
             }

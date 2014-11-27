@@ -177,58 +177,34 @@ class User extends CActiveRecord
 		return parent::model($className);
 	}
         
-        protected function beforeSave(){
-        //     print_r($this->brth);
-        	//$this->password=CPasswordHelper::hashPassword($this->password);
-
-        	if (Yii::app()->user->isGuest)$this->password=crypt($this->password);     
-        	if (!Yii::app()->user->isGuest && $this->password3!="") $this->password=crypt($this->password3);             
-
-
+        protected function beforeSave()
+        {
+            if (Yii::app()->user->isGuest)$this->password=crypt($this->password);     
+            if (!Yii::app()->user->isGuest && $this->password3!="") $this->password=crypt($this->password3);             
             if(!parent::beforeSave())
                 return false;
 
 
-                
-            	if ($this->image==null && Yii::app()->user->isGuest){$this->photo = 'nophoto.jpg' ;return true;}
-            	else if($this->image ){
-            		if ($this->photo!='nophoto.jpg' && (!Yii::app()->user->isGuest)){
-            			$oldfile=$this->photo;
-				if (file_exists(Yii::app()->basePath.'/../images/avatars/'. $oldfile) && is_file(Yii::app()->basePath.'/../images/avatars/'. $oldfile)){
-						unlink(Yii::app()->basePath.'/../images/avatars/'. $oldfile);
-            		}}
-                $name=Image::newName($this->image->name);
-                $this->image->saveAs(Yii::getPathOfAlias('webroot.images.avatars').DIRECTORY_SEPARATOR.$name);
-                $this->photo = $name;
-            }
 
-        		if ($this->delPhoto==true) {
-        			$oldfile=$this->photo;
-					if (file_exists(Yii::app()->basePath.'/../images/avatars/'. $oldfile)){
-						unlink(Yii::app()->basePath.'/../images/avatars/'. $oldfile);
-					}
-        			$this->photo = 'nophoto.jpg';}
+            if ($this->image==null && Yii::app()->user->isGuest){$this->photo = 'nophoto.jpg' ;return true;}
+            else if($this->image ){
+                    if ($this->photo!='nophoto.jpg' && (!Yii::app()->user->isGuest)){
+                            $oldfile=$this->photo;
+                            if (file_exists(Yii::app()->basePath.'/../images/avatars/'. $oldfile) && is_file(Yii::app()->basePath.'/../images/avatars/'. $oldfile)){
+                                            unlink(Yii::app()->basePath.'/../images/avatars/'. $oldfile);
+                    }}
+            $name=Image::newName($this->image->name);
+            $this->image->saveAs(Yii::getPathOfAlias('webroot.images.avatars').DIRECTORY_SEPARATOR.$name);
+            $this->photo = $name;
+        }
 
-
-					                
-					//CPasswordHelper::hashPassword($this->password);
-               // $this->password = $this->hashPassowrd($this->password, $this->salt);
-                //$this->brth=strtotime($this->brth);
-                //$b=strtotime($this->brth);
-				//$this->brth=date('Y-m-d', $b);
-                //$this->brth = date('Y-m-d', strtotime($this->brth));//strtotime($this->date_start);
-                //$this->password = $this->hashPassword($this->password);
-            //$this->photo=Image::saveImg($this->image);
-        
-       // if(($this->scenario=='insert' || $this->scenario=='update') &&
-        //    ($document=CUploadedFile::getInstance($this,'document'))){
-        //    $this->deleteDocument(); // старый документ удалим, потому что загружаем новый
- 
-        //    $this->document=$document;
-         //   $this->document->saveAs(
-          //      Yii::getPathOfAlias('webroot.media').DIRECTORY_SEPARATOR.$this->document);
-        
-            return true;
+                    if ($this->delPhoto==true && $this->photo!='nophoto.jpg' ) {
+                            $oldfile=$this->photo;
+                                    if (file_exists(Yii::app()->basePath.'/../images/avatars/'. $oldfile)){
+                                            unlink(Yii::app()->basePath.'/../images/avatars/'. $oldfile);
+                                    }
+                            $this->photo = 'nophoto.jpg';}
+                return true;
         }
 
         protected function afterFind() {
@@ -247,12 +223,10 @@ class User extends CActiveRecord
                     ':u'=>$id,
                 );
 
-                $count= User::model()->count($crit);//return false; 
+                $count= User::model()->count($crit);
                 if($count==1){             
                 $user=User::model()->find($crit);
                 return $user->photo;}
-                //$count= Relationship::model()->count($crit);//return false;
-                //echo ($count);
                 else 
                	return false;
             
@@ -264,11 +238,10 @@ class User extends CActiveRecord
    		$crit=new CDbCriteria;
         $crit->condition="login LIKE :u OR first_name LIKE :u OR last_name LIKE :u";
         $crit->params=array(
-            ':u'=>"%".$login."%",//':u'=>"%".$login."%",
+            ':u'=>"%".$login."%",
         );
         
-        $count= User::model()->count($crit);//return false;
-        //echo ($count);
+        $count= User::model()->count($crit);
         return $count;
     }  
 

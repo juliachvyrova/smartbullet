@@ -1,3 +1,4 @@
+<div class="back" data-title="Назад" onclick="location.href='<?php echo Yii::app()->createUrl("message/to");?>'"></div>
 <h1>Новое сообщение</h1>
 <div class="post">
     <img class="mini-photo" src="<?php echo Yii::app()->getBaseUrl(true).'/images/avatars/'.$user->photo?>">

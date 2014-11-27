@@ -1,9 +1,6 @@
-<?php
-/* @var $this MessageController */
-/* @var $data Message */
-?>
 
 <div class="post message <?php if ($data->state==1) echo "newMess";?>"  data-id="<?php echo $data->id?>" id="mess<?php echo $data->id?>" data-url1="<?php echo Yii::app()->createUrl("message/readNew");?>" >
+	
 	<div class="delMess" data-title="Удалить" data-message=<?php echo $data->id; ?> data-url1="<?php echo Yii::app()->createUrl("message/del");?> " data-user="<?php echo Yii::app()->user->getId(); ?>"></div>
 
 <div class="message" onclick="location.href='<?php echo Yii::app()->createUrl("message/view",array('id'=>$data->id));?>'">

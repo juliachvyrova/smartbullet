@@ -115,36 +115,36 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
         
-    public function actionRegistration()
-	{
-        $model=new User;
-		$model->setScenario('registration');
+        public function actionRegistration()
+        {
+            $model=new User;
+            $model->setScenario('registration');
 
-		if(isset($_POST['User']))
-		{            
-            $model->image=CUploadedFile::getInstance($model,'image');
-			$model->attributes=$_POST['User'];
-			$model->data=date("Y-m-d");
-			$model->rating=0;
-			if ($model->brth2==NULL) {
-				$model->brth=NULL;
-			} else {	
-				$b=strtotime($model->brth2);
-				$b= date('Y-m-d', $b );
-				$model->brth=$b;
-			}	
-			if($model->save()) {
-				$this->redirect(Yii::app()->user->returnUrl);
-				//new UserIdentity($model->login,$model->password);
-				//Yii::app()->user=$model;
-				//$this->redirect(array('view','id'=>$model->id));
-				//if($model->validate() && $model->login())
-				//$this->redirect(Yii::app()->user->returnUrl);}
-			}
-		}
+            if(isset($_POST['User']))
+            {            
+                $model->image=CUploadedFile::getInstance($model,'image');
+                $model->attributes=$_POST['User'];
+                $model->data=date("Y-m-d");
+                $model->rating=0;
+                if ($model->brth2==NULL) {
+                        $model->brth=NULL;
+                } else {	
+                        $b=strtotime($model->brth2);
+                        $b= date('Y-m-d', $b );
+                        $model->brth=$b;
+                }	
+                if($model->save()) {
+                        $this->redirect(Yii::app()->user->returnUrl);
+                }
+            }
 
-		$this->render('registration',array(
-			'model'=>$model,
-		));
-	}
+            $this->render('registration',array(
+                    'model'=>$model,
+            ));
+        }
+        
+        public function actionRules()
+        {
+            $this->render('rules');
+        }
 }

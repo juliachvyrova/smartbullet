@@ -27,18 +27,12 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('go'),
-				'users'=>array('*'),
-			),
+
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('top','index','create','update','view','friends','serch','requests','myRequests','find','changePass','admin'/*,'messageTo'*/),
+				'actions'=>array('top','index','create','update','view','friends','serch','requests','myRequests','find','changePass','top'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('top','admin','delete'),
-				'users'=>array('admin'),
-			),
+
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -364,18 +358,10 @@ $dataProvider=new CActiveDataProvider('User', array(
 	 */
 	public function actionTop()
 	{
-		//$model=new User('top');
-                $model=User::Top();
-                
-                
-                
-		//$model->unsetAttributes();  // clear any default values
-	/*	if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
-*/
-		$this->render('admin',array(
-			'model'=>$model,
-		));
+            $model=User::Top();
+            $this->render('top',array(
+                    'model'=>$model,
+            ));
 	}
 
 	/**
