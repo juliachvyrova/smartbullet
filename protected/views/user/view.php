@@ -21,7 +21,7 @@
     <div class="right">
         <div id="login">
             <?php
-                echo $model->login;
+                echo CHtml::encode($model->login);
             ?>
         </div>
     <div class="inf2">
