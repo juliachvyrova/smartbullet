@@ -13,15 +13,16 @@
     <img src="../images/star.png" id="win">
     <div id="field"></div>
     <div id="choise">
-        <input type="submit" value="Attack" class="solut">
-        <input type="submit" value="Dodge" class="solut">
-        <input type="submit" value="Heal" class="solut">
+         <div id="my_timer">60</div>
+        <input type="submit" value="Attack" class="solut" id="attak">
+        <input type="submit" value="Dodge" class="solut" id="dodge">
+        <input type="submit" value="Heal" class="solut" id="heal">
         <select id="direction">
-            <option>Left</option>
-            <option>Right</option>
-            <option>Back</option>
+            <option>Top</option>
+            <option>Center</option>
+            <option>Bottom</option>
         </select>
-        <div id="my_timer">60</div>
+       
     </div>
 </div>
 <div id='rol'>
@@ -71,7 +72,9 @@ array(
     
     .game_win{
         height: 400px;
-        background-color: black;
+        background: url("../images/metal2.jpg");
+        background-size: contain;
+        //background-color: black;
         padding: 5px;
     }
     
@@ -79,7 +82,7 @@ array(
         height: 100%;
         width: 69%;
         float: left;
-        background-color: silver;
+        //background-color: silver;
     }
     
     #choise{
@@ -116,7 +119,7 @@ array(
     
     #left-team{
         width: 50%;
-        background-color: rgba(0,0,255,0.5);
+        //background-color: rgba(0,0,255,0.5);
         height: 100%;
         float: left;
     }
@@ -124,7 +127,7 @@ array(
     
     #right-team{
         width: 50%;
-        background-color: rgba(255,0,0,0.5);
+        //background-color: rgba(255,0,0,0.5);
         height: 100%;
         float: right;
     }
@@ -185,5 +188,32 @@ array(
         position: absolute;
         left: 100px;
         top: 100px;
+    }
+    #attak{
+        font-size:0;
+        width: 150px;
+        height: 120px;
+        background: url("../images/gun.png") no-repeat center;
+        border: none;
+        background-size: contain;
+    }
+    #heal{
+        font-size:0;
+        width: 150px;
+        height: 120px;
+        background: url("../images/heal.png") no-repeat center;
+        border: none;
+        background-size: contain;
+    }
+    #dodge{
+        font-size:0;
+        width: 150px;
+        height: 120px;
+        background: url("../images/dodge.png") no-repeat center;
+        border: none;
+        background-size: contain;
+    }
+    .solut{
+        margin-top: 5px;
     }
 </style>

@@ -21,7 +21,7 @@ $(document).ready(function(){
     MaxTime = $("#my_timer").html();
 
     $('#output').animate({'scrollTop': 99999999});
-    //setInterval(chatPolling, 3000);
+    setInterval(chatPolling, 3000);
     
     $('.solut').on('click',function(){
         flag = true;
@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 function giveMap()
 {
-    $('#field').html('<h1>waiting for players...</h1>');
+    $('#field').html('<h1 color="white">waiting for players...</h1>');
     $.ajax({
             url: $('#baseUrl').val() + '/game/giveMap/' +  $('#game_id').val(),
             //url: '/game/giveMap/' +  $('#game_id').val(),
@@ -87,8 +87,10 @@ function giveStats()
                     $('#w' + i +' .hp').animate({width: wariors[i-1].hp +'%'},'slow');
                 }
                 console.log(wariors);
+                God();
             }     
         });
+        
 }
 
 function makeWarior(selector,id)
@@ -196,11 +198,11 @@ function gamePolling(){
 
 function des(data){
     switch(data){
-        case 'Left':
+        case 'Top':
             return 1;
-        case 'Back':
+        case 'Center':
             return 2;
-        case 'Right':
+        case 'Bottom':
             return 3;
         case 'Attack':
             return 1;
@@ -225,11 +227,11 @@ function startTimer() {
             if(flag == true)
                 flag = false;
             else {
-               /* $.each( $('.solut') , function(){
+                $.each( $('.solut') , function(){
                     this.disabled = true;
                 });
                 $('#choise').slideToggle(1500);
-                user_choise(0);*/
+                user_choise(0);
             }
             return;
         }
@@ -355,6 +357,7 @@ function escapeHtml(text) {
 
 function God()
 {
+    console.log('GOD');
     for(i = 0; i < 6; i++)
     {
         if (wariors[i].hp == 0 && wariors[i].dead == false)
