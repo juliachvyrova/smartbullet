@@ -10,6 +10,7 @@
 <br><br><br>
 <div class="game_win">
     <img src="../images/aim.png" id="aim"><img src="../images/miss.png" id="miss">
+    <img src="../images/star.png" id="win">
     <div id="field"></div>
     <div id="choise">
         <input type="submit" value="Attack" class="solut">
@@ -170,13 +171,19 @@ array(
         position: absolute;
         left: 100px;
         top: 100px;
-       // opacity: 0;
     }
+    
     #miss{
         width: 100px;
         position: absolute;
         left: 100px;
         top: 100px;
-       // opacity: 0;
+    }
+    
+    #win{
+        width: 300px;
+        position: absolute;
+        left: 100px;
+        top: 100px;
     }
 </style>

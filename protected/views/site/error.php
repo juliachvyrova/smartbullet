@@ -1,15 +1,8 @@
-<?php
-/* @var $this SiteController */
-/* @var $error array */
 
-$this->pageTitle=Yii::app()->name . ' - Error';
-$this->breadcrumbs=array(
-	'Error',
-);
-?>
+<h1>Error <?php echo $code; ?></h1>
 
-<h2>Error <?php echo $code; ?></h2>
-
-<div class="error">
+<div class="error2">
 <?php echo CHtml::encode($message); ?>
+<br><br>
+<input type="button" onclick="location.href='<?php echo Yii::app()->createUrl("");?>'" value="На главную">
 </div>

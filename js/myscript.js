@@ -1,8 +1,10 @@
     DAMAGE = 20;
     wariors = [];
+    freez = false;
 $(document).ready(function(){
     $('#aim').hide();
     $('#miss').hide();
+    $('#win').hide();
     //disable user control while dont get map
     $.each( $('.solut') , function(){
             this.disabled = true;
@@ -110,6 +112,7 @@ function makeField()
 
 function user_choise(val)
 {
+    freez = true;
     $.ajax({
             url: $('#baseUrl').val() +'/game/fight/' +  $('#game_id').val(),
             type: "post",
@@ -183,7 +186,8 @@ function gamePolling(){
                     });
                     $('#choise').slideDown(1000);
                     $("#my_timer").html(MaxTime);
-                    setTimeout(startTimer, 6000);
+                    freez = false;
+                    //setTimeout(startTimer, 6000);
                 }
             }
         });
@@ -209,27 +213,29 @@ function des(data){
 
 
 function startTimer() {
-    var my_timer = $("#my_timer").html();
-    if (my_timer == 0) {
-        $.each( $('.solut') , function(){
-            this.disabled = false;
-        });
-        //$('#choise').slideDown(1000);
-        //$("#my_timer").html(MaxTime);
-        //setTimeout(startTimer, 1000);
-        if(flag == true)
-            flag = false;
-        else {
-           /* $.each( $('.solut') , function(){
-                this.disabled = true;
+    if(freez == false){
+        var my_timer = $("#my_timer").html();
+        if (my_timer == 0) {
+            $.each( $('.solut') , function(){
+                this.disabled = false;
             });
-            $('#choise').slideToggle(1500);
-            user_choise(0);*/
+            //$('#choise').slideDown(1000);
+            //$("#my_timer").html(MaxTime);
+            //setTimeout(startTimer, 1000);
+            if(flag == true)
+                flag = false;
+            else {
+               /* $.each( $('.solut') , function(){
+                    this.disabled = true;
+                });
+                $('#choise').slideToggle(1500);
+                user_choise(0);*/
+            }
+            return;
         }
-        return;
+        my_timer--;
+        $("#my_timer").html(my_timer);
     }
-    my_timer--;
-    $("#my_timer").html(my_timer);
     setTimeout(startTimer, 1000);
  }
  
@@ -243,8 +249,8 @@ function Warior(id){
                         
 function play(data,time)
 {
+    var plus = 1;
     setTimeout(function(){
-        //console.log(data);
             for(i = 0; i < 6; i++)
             {
                 if(wariors[i].dead == false){
@@ -277,11 +283,11 @@ function play(data,time)
                                 }
                         }
                     }
-                }
+                } else plus = 0;
             }
         },time*2500);
         //console.log(wariors);
-        return time+1;
+        return time + plus;
 }
 
 function hit(place,i)
@@ -361,15 +367,34 @@ function God()
         }
             
     }
+    var offset;
     if(wariors[0].dead == true && wariors[1].dead == true && wariors[2].dead == true)
     {
-        alert('team2 win');
+        //alert('team2 win');
+        offset = $('#w6').offset();
+        $('#win').css('top',offset.top);
+        $('#win').css('left',offset.left);
+        offset = $('#w4').offset();
+        $('#win').show(300);
+        $('#win').animate({left: offset.left, top: offset.top},1000);
         endGame();
+        setTimeout(function(){
+            document.location.href = $('#baseUrl').val() + '/game';
+        },1500);
     }
     if(wariors[3].dead == true && wariors[4].dead == true && wariors[5].dead == true)
     {
-        alert('team1 win');
+        //alert('team1 win');
+        offset = $('#w3').offset();
+        $('#win').css('top',offset.top);
+        $('#win').css('left',offset.left);
+        offset = $('#w1').offset();
+        $('#win').show(300);
+        $('#win').animate({left: offset.left, top: offset.top},1000);
         endGame();
+        setTimeout(function(){
+            document.location.href = $('#baseUrl').val() + '/game';
+        },1500);
     }
     
 }

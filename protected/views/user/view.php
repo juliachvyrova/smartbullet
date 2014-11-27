@@ -15,14 +15,16 @@
                     <br><input type="button" id="inviteGame" data-url1="<?php echo Yii::app()->createUrl("invite/newGame");?>" data-url2="<?php echo Yii::app()->createUrl("game");?>" data-id1="<?php echo $model->id;?>" value="Пригласить в игру">
             <?php endif; ?> 
         </div> 
-        <div id="login">
-            <?php
-                echo $model->login;
-            ?>
-        </div>
+        
     </div>
 
-    <div class="inf">
+    <div class="right">
+        <div id="login">
+            <?php
+                echo CHtml::encode($model->login);
+            ?>
+        </div>
+    <div class="inf2">
         <div id="openInf" class="Open"></div>
         Информация 
     </div>
@@ -48,6 +50,7 @@
 	        <?php echo "<td>".CHtml::encode($model->rating)."</td></tr>";} ?>    	    
         </table>
     </div>
+</div>
     
     <div class="inf">
         <div id="openWall" class="Open"></div> 

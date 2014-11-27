@@ -10,10 +10,11 @@ body
 
 #page
 {
-	margin-top: 5px;
-	margin-bottom: 5px;
+
+	margin-bottom: 40px;
 	background: #e0e0e0;
 	border: 1px solid #C9E0ED;
+
 }
 
 #header
@@ -46,13 +47,14 @@ body
 	padding: 10px;
 	margin: 10px 20px;
 	font-size: 0.8em;
-	text-align: center;
-	border-top: 1px solid #C9E0ED;
+	//text-align: center;
+	border-top: 1px solid #fff;
+        margin-bottom: 10px;
 }
 
 #logo
 {
-	padding: 10px 20px;
+	padding: 5px 20px;
 	font-size: 200%;
 }
 
