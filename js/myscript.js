@@ -43,7 +43,7 @@ function giveMap()
 {
     $('#field').html('<h1>waiting for players...</h1>');
     $.ajax({
-            url: 'index.php?r=game/giveMap&id=' +  $('#game_id').val(),
+            url: $('#baseUrl').val() + '/game/giveMap/' +  $('#game_id').val(),
             //url: '/game/giveMap/' +  $('#game_id').val(),
             type: "post",
             dataType: "json",
@@ -75,7 +75,7 @@ function giveMap()
 function giveStats()
 {
     $.ajax({
-            url: 'index.php?r=game/giveStats&id=' +  $('#game_id').val(),
+            url: $('#baseUrl').val() +'/game/giveStats/' +  $('#game_id').val(),
             type: "post",
             dataType: "json",
             success: function(data){
@@ -111,7 +111,7 @@ function makeField()
 function user_choise(val)
 {
     $.ajax({
-            url: 'index.php?r=game/fight&id=' +  $('#game_id').val(),
+            url: $('#baseUrl').val() +'/game/fight/' +  $('#game_id').val(),
             type: "post",
             dataType: "json",
             data: {
@@ -127,7 +127,7 @@ function user_choise(val)
 
 function send(){
     $.ajax({
-            url: 'index.php?r=game/chatPolling&id=' + $('#game_id').val(),
+            url: $('#baseUrl').val() +'/game/chatPolling/' + $('#game_id').val(),
             type: "post",
             dataType: "json",
             data: {
@@ -145,7 +145,7 @@ function send(){
 
 function chatPolling(){
     $.ajax({
-            url: 'index.php?r=game/chatPolling&id=' + $('#game_id').val(),
+            url: $('#baseUrl').val() +'/game/chatPolling/' + $('#game_id').val(),
             type: "post",
             dataType: "json",
             data: {
@@ -163,7 +163,7 @@ function chatPolling(){
 
 function gamePolling(){
     $.ajax({
-            url: 'index.php?r=game/gamePolling&id=' + $('#game_id').val(),
+            url: $('#baseUrl').val() +'/game/gamePolling/' + $('#game_id').val(),
             type: "post",
             dataType: "json",
             success: function(data){
@@ -355,7 +355,7 @@ function God()
         {   
             wariors[i].dead = true;
             $('#w'+(i+1)+' .war-img').hide();
-            $('#w'+(i+1)+' .war-img').css('background' ,'url("images/rip.png") no-repeat center');
+            $('#w'+(i+1)+' .war-img').css('background' ,'url("../images/rip.png") no-repeat center');
             $('#w'+(i+1)+' .war-img').css('background-size' ,'contain');
             $('#w'+(i+1)+' .war-img').show(500);
         }
@@ -377,7 +377,7 @@ function God()
 function endGame()
 {
     $.ajax({
-        url: 'index.php?r=game/endGame&id=' + $('#game_id').val(),
+        url: $('#baseUrl').val() +'/game/endGame/' + $('#game_id').val(),
         type: "post",
         dataType: "json"
     });

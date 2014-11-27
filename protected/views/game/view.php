@@ -3,12 +3,13 @@
     $cs = Yii::app()->getClientScript();
     $cs->registerScriptFile($baseUrl.'/js/myscript.js');
 ?>
+<input type="hidden"value="<?php echo $baseUrl ?>" id="baseUrl">
 <div id="myhead">
 
 </div>
 <br><br><br>
 <div class="game_win">
-    <img src="images/aim.png" id="aim"><img src="images/miss.png" id="miss">
+    <img src="../images/aim.png" id="aim"><img src="../images/miss.png" id="miss">
     <div id="field"></div>
     <div id="choise">
         <input type="submit" value="Attack" class="solut">
@@ -93,7 +94,7 @@ array(
     
     @font-face {
         font-family: timer;
-        src: url(fonts/timer.ttf);
+        src: url(../fonts/timer.ttf);
     }
     #myhead{
     }
@@ -135,7 +136,7 @@ array(
         margin: 0 auto;
         height: 80%;
         width: 100%;
-        background: url("images/warior.png") no-repeat center;
+        background: url("../images/warior.png") no-repeat center;
         background-size: contain;
     }
     

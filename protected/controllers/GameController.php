@@ -23,7 +23,7 @@ class GameController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','chatPolling','fight','tern','gamePolling','giveMap','giveStats','endGame'),
+				'actions'=>array('index','view','chatPolling','fight','tern','gamePolling','giveMap','giveStats','endGame','createGame'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -444,5 +444,13 @@ class GameController extends Controller
                 $game->game_status = 2;
                 $game->save();
             }
+        }
+        public function actionCreateGame(){
+            if(Yii::app()->user->getId() !== NULL){
+                $game = new Game();
+                $game->game_status = 0;
+                $game->save();
+                echo json_encode(array('id' => $game->id));
+            } else                echo NULL;
         }
 }
