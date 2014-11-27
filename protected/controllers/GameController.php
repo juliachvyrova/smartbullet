@@ -416,12 +416,12 @@ class GameController extends Controller
             {
                 for($i = 1; $i < 4; $i++){
                     $user = User::model()->findByPk($map['user'.$i]);
-                    $user->rating += 20;
+                    $user->rating -= 20;
                     $user->save();
                 }
                 for($i = 4; $i < 7; $i++){
                     $user = User::model()->findByPk($map['user'.$i]);
-                    $user->rating -= 20;
+                    $user->rating += 20;
                     $user->save();
                 }
                 $game = Game::model()->findByPk($id);
