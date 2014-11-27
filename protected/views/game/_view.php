@@ -1,11 +1,14 @@
 <ul>
+    <div class="post g<?php $map1 = GameMap::model()->findByAttributes(array('game_id' => $data->id)); 
+    if ($map1 != NULL){echo $map1->user_count;}
+    else echo 0;?>">
 	<?php 
             if(!($data->game_status))
-                echo CHtml::link(CHtml::encode($data->getAttributeLabel('id')). 
-                        ': ' . CHtml::encode($data->id), array('view', 'id'=>$data->id));
+                echo CHtml::link(/*CHtml::encode($data->getAttributeLabel('id')). 
+                        ': ' */"Игра ". CHtml::encode($data->id), array('view', 'id'=>$data->id));
             else
-                echo CHtml::encode($data->getAttributeLabel('id')). 
-                        ': ' . CHtml::encode($data->id);
+                echo /*CHtml::encode($data->getAttributeLabel('id')). 
+                        ': '*/"Игра " . CHtml::encode($data->id);
         ?>
 	<br />
 	<b><?php echo CHtml::encode($data->getAttributeLabel('game_status')) ?>:</b>
@@ -25,12 +28,13 @@
                     if($map['user'.$i] !== NULL)
                     {
                         $user = User::model()->findByPk($map['user'.$i]);
-                        echo $user->login . ' | ';
+                        if (isset($user->login)) echo $user->login . ' | ';
                     }
                 }
             }else{
                 echo "<b>Gamers count: 0<b>";
             }
         ?>
+        </div>
 </ul>
 <br>
