@@ -1,4 +1,4 @@
-var position1='down';
+var position1='up';
 var position2='up';
 var showSmile='no';
 
@@ -11,7 +11,7 @@ function writeSmile(cod,textId){
 $(document).ready(function()
 {
     $("#left-menu").height($("#content").height());
-    $("#openWall").css('background-image',' url("../images/arr2.jpg")');
+   // $("#openWall").css('background-image',' url("../images/arr2.jpg")');
 
 
     //просмотр информации о пользователе
