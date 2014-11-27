@@ -4,6 +4,7 @@
 $(document).ready(function(){
     $('#aim').hide();
     $('#miss').hide();
+    $('#win').hide();
     //disable user control while dont get map
     $.each( $('.solut') , function(){
             this.disabled = true;
@@ -366,15 +367,34 @@ function God()
         }
             
     }
+    var offset;
     if(wariors[0].dead == true && wariors[1].dead == true && wariors[2].dead == true)
     {
-        alert('team2 win');
+        //alert('team2 win');
+        offset = $('#w6').offset();
+        $('#win').css('top',offset.top);
+        $('#win').css('left',offset.left);
+        offset = $('#w4').offset();
+        $('#win').show(300);
+        $('#win').animate({left: offset.left, top: offset.top},1000);
         endGame();
+        setTimeout(function(){
+            document.location.href = $('#baseUrl').val() + '/game';
+        },1500);
     }
     if(wariors[3].dead == true && wariors[4].dead == true && wariors[5].dead == true)
     {
-        alert('team1 win');
+        //alert('team1 win');
+        offset = $('#w3').offset();
+        $('#win').css('top',offset.top);
+        $('#win').css('left',offset.left);
+        offset = $('#w1').offset();
+        $('#win').show(300);
+        $('#win').animate({left: offset.left, top: offset.top},1000);
         endGame();
+        setTimeout(function(){
+            document.location.href = $('#baseUrl').val() + '/game';
+        },1500);
     }
     
 }
