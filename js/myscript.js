@@ -1,5 +1,6 @@
     DAMAGE = 20;
     wariors = [];
+    freez = false;
 $(document).ready(function(){
     $('#aim').hide();
     $('#miss').hide();
@@ -110,6 +111,7 @@ function makeField()
 
 function user_choise(val)
 {
+    freez = true;
     $.ajax({
             url: $('#baseUrl').val() +'/game/fight/' +  $('#game_id').val(),
             type: "post",
@@ -183,7 +185,8 @@ function gamePolling(){
                     });
                     $('#choise').slideDown(1000);
                     $("#my_timer").html(MaxTime);
-                    setTimeout(startTimer, 6000);
+                    freez = false;
+                    //setTimeout(startTimer, 6000);
                 }
             }
         });
@@ -209,27 +212,29 @@ function des(data){
 
 
 function startTimer() {
-    var my_timer = $("#my_timer").html();
-    if (my_timer == 0) {
-        $.each( $('.solut') , function(){
-            this.disabled = false;
-        });
-        //$('#choise').slideDown(1000);
-        //$("#my_timer").html(MaxTime);
-        //setTimeout(startTimer, 1000);
-        if(flag == true)
-            flag = false;
-        else {
-           /* $.each( $('.solut') , function(){
-                this.disabled = true;
+    if(freez == false){
+        var my_timer = $("#my_timer").html();
+        if (my_timer == 0) {
+            $.each( $('.solut') , function(){
+                this.disabled = false;
             });
-            $('#choise').slideToggle(1500);
-            user_choise(0);*/
+            //$('#choise').slideDown(1000);
+            //$("#my_timer").html(MaxTime);
+            //setTimeout(startTimer, 1000);
+            if(flag == true)
+                flag = false;
+            else {
+               /* $.each( $('.solut') , function(){
+                    this.disabled = true;
+                });
+                $('#choise').slideToggle(1500);
+                user_choise(0);*/
+            }
+            return;
         }
-        return;
+        my_timer--;
+        $("#my_timer").html(my_timer);
     }
-    my_timer--;
-    $("#my_timer").html(my_timer);
     setTimeout(startTimer, 1000);
  }
  
@@ -243,8 +248,8 @@ function Warior(id){
                         
 function play(data,time)
 {
+    var plus = 1;
     setTimeout(function(){
-        //console.log(data);
             for(i = 0; i < 6; i++)
             {
                 if(wariors[i].dead == false){
@@ -277,11 +282,11 @@ function play(data,time)
                                 }
                         }
                     }
-                }
+                } else plus = 0;
             }
         },time*2500);
         //console.log(wariors);
-        return time+1;
+        return time + plus;
 }
 
 function hit(place,i)
