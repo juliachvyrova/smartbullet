@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 function giveMap()
 {
-    $('#field').html('<h1 color="white">waiting for players...</h1>');
+    $('#field').html('<h1>waiting for players...</h1>');
     $.ajax({
             url: $('#baseUrl').val() + '/game/giveMap/' +  $('#game_id').val(),
             //url: '/game/giveMap/' +  $('#game_id').val(),
